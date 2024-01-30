@@ -161,6 +161,17 @@ while True:
         break  # No hay más tokens
     print(tok)
 lexer.lineno = 1
+
+def tipo(valor):
+    if valor is False or valor is True:
+        return 'Bool'
+    elif isinstance(valor, int) or isinstance(valor, float):
+        return 'Number'
+    elif isinstance(valor, str):
+        return 'String'
+    else:
+        return 'None'
+
 class Nodo():
     def __init__(self, ident=0):
         self.ident = ident
@@ -212,7 +223,7 @@ class Asignacion(Nodo):
             tipoDeVariable = self.son1.tipo()
             print(tipoDeVariable)
             symbol_table[self.val] = {'type': tipoDeVariable}
-
+            
             # Verificar si la asignación es una cadena y actualizar el tipo en la tabla de símbolos
             if tipoDeVariable == 'String':
                 symbol_table[self.val]['type'] = 'String'
@@ -297,7 +308,7 @@ class ExpresionArray(Nodo):
         else:
             return '[]'
     def tipo(self):
-        return 'Array'
+        return self.elementos.tipo()
 class Elementos(Nodo):
     def __init__(self,elemento,elementos=None):
         self.elemento = elemento
@@ -307,13 +318,16 @@ class Elementos(Nodo):
             return f'{self.elemento.parseToPython()}'
         else:
             return f'{self.elemento.parseToPython()},{self.elementos.parseToPython()}'
-
+    def tipo(self):
+        return self.elemento.tipo()
 class ElementoArray(Nodo):
     def __init__(self,identificador, indice):
         self.identificador = identificador
         self.indice = indice
     def parseToPython(self, indentation = 0):
         return f'{self.identificador}[{self.indice}]'
+    def tipo(self):
+        return symbol_table[self.identificador].get('type')
 #Array de objetos
 
 class ObjetosArray(Nodo):
@@ -355,8 +369,21 @@ class Propiedad(Nodo):
         self.identificador = identificador
         self.valor = valor
     def parseToPython(self, identation = 0):
+        tipoDeVariable = self.valor.tipo()
+        print(tipoDeVariable)
+        symbol_table[self.identificador] = {'type': tipoDeVariable}
+        
         return f'\'{self.identificador}\': {self.valor}'
-
+        
+class ExpresionAccesoObjetoArray(Nodo):
+    def __init__(self, identificador_array, indice, identificador_propiedad):
+        self.identificador_array = identificador_array
+        self.indice = indice
+        self.identificador_propiedad = identificador_propiedad
+    def parseToPython(self, identation = 0):
+        return f'{self.identificador_array}[{self.indice}][\'{self.identificador_propiedad}\']'
+    def tipo(self):
+        return symbol_table[self.identificador_propiedad].get('type')
 class Valor(Nodo):
     def __init__(self, valor):
         self.valor = valor
@@ -378,7 +405,7 @@ class Mostrar(Nodo):
         self.expresion = expresion
     def parseToPython(self,identation=0):
         return f'print({self.expresion.parseToPython(identation)})'
-
+    
 class CondicionalIf(Nodo):
     def __init__(self, comparacion, declaraciones, elif_blocks=None, else_block=None):
         self.comparacion = comparacion
@@ -590,6 +617,14 @@ def p_propiedad(p):
     propiedad : ID COLON valor
     '''
     p[0] = Propiedad(p[1],p[3])
+
+def p_expresionAccesoObjetoArray(p):
+    '''
+    expresion : ID LBRACKET NUM RBRACKET PUNTO ID
+    '''
+    p[0] = ExpresionAccesoObjetoArray(p[1], p[3], p[6])
+
+
 #Por revisar p_unario
 
 def p_unario(p):
