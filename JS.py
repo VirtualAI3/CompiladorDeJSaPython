@@ -555,9 +555,10 @@ class BucleFor(Nodo):
         self.declaracion_final = declaracion_final
         self.declaraciones = declaraciones
     def parseToPython(self, indentation=0):
-        print(self.declaracion_final.parseToPython(indentation))
         ind = " " * indentation
-        result = f'{ind}for {self.declaracion_inicial.id()} in range({self.comparacion.der()}, {self.declaracion_inicial.valor()}):'
+        if self.declaracion_inicial.id() not in symbol_table:
+            symbol_table[self.declaracion_inicial.id()] = {'type': 'Number'}
+        result = f'{ind}for {self.declaracion_inicial.id()} in range({self.declaracion_inicial.valor()}, {self.comparacion.der()}):'
         result += f'\n{self.declaraciones.parseToPython(indentation+4)}'
         
         return result
@@ -650,7 +651,6 @@ def p_asignacionMultipleSinSemiColon(p):
 def p_variablesAssign(p):
     '''
     variables_assign : ID
-                     | ID ASSIGN expresion
                      | variables_assign COMMA ID ASSIGN expresion
     '''
     if len(p) == 2:
@@ -703,6 +703,7 @@ def p_elementos(p):
 def p_elementoArray(p):
     '''
     expresion : ID LBRACKET NUM RBRACKET
+              | ID LBRACKET ID RBRACKET
     '''
     p[0] = ElementoArray(p[1], p[3])
         
@@ -747,9 +748,9 @@ def p_propiedad(p):
 def p_expresionAccesoObjetoArray(p):
     '''
     expresion : ID LBRACKET NUM RBRACKET PUNTO ID
+              | ID LBRACKET ID RBRACKET PUNTO ID
     '''
     p[0] = ExpresionAccesoObjetoArray(p[1], p[3], p[6])
-
 
 #Por revisar p_unario
 
@@ -839,9 +840,9 @@ def p_comparacion(p):
     
 def p_bucle_for(p):
     '''
-    bucle_for : FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    bucle_for : FOR LPAREN asignacion comparacion SEMICOLON unario_sin_semicolon RPAREN LBRACE declaraciones RBRACE
     '''
-    p[0] = BucleFor(p[3],p[5],p[7],p[10])
+    p[0] = BucleFor(p[3],p[4],p[6],p[9])
 
 def p_empty(p):
     'empty :'

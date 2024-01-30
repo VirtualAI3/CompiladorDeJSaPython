@@ -1,0 +1,3878 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    WHILE
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> declaraciones
+Rule 2     programa -> empty
+Rule 3     declaraciones -> declaraciones declaracion
+Rule 4     declaraciones -> declaracion
+Rule 5     declaracion -> asignacion_multiple
+Rule 6     declaracion -> asignacion_multiple_sin_semicolon
+Rule 7     declaracion -> asignacion
+Rule 8     declaracion -> asignacion_sin_semicolon
+Rule 9     declaracion -> mostrar
+Rule 10    declaracion -> condicional
+Rule 11    declaracion -> bucle_for
+Rule 12    declaracion -> unario
+Rule 13    declaracion -> unario_sin_semicolon
+Rule 14    asignacion -> LET ID ASSIGN expresion SEMICOLON
+Rule 15    asignacion -> VAR ID ASSIGN expresion SEMICOLON
+Rule 16    asignacion -> CONST ID ASSIGN expresion SEMICOLON
+Rule 17    asignacion -> LET ID ASSIGN expresion_array SEMICOLON
+Rule 18    asignacion -> CONST ID ASSIGN expresion_array SEMICOLON
+Rule 19    asignacion -> VAR ID ASSIGN expresion_array SEMICOLON
+Rule 20    asignacion -> LET ID ASSIGN objeto_array SEMICOLON
+Rule 21    asignacion -> CONST ID ASSIGN objeto_array SEMICOLON
+Rule 22    asignacion -> VAR ID ASSIGN objeto_array SEMICOLON
+Rule 23    asignacion_sin_semicolon -> LET ID ASSIGN expresion
+Rule 24    asignacion_sin_semicolon -> VAR ID ASSIGN expresion
+Rule 25    asignacion_sin_semicolon -> CONST ID ASSIGN expresion
+Rule 26    asignacion_sin_semicolon -> LET ID ASSIGN expresion_array
+Rule 27    asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array
+Rule 28    asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array
+Rule 29    asignacion_sin_semicolon -> LET ID ASSIGN objeto_array
+Rule 30    asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array
+Rule 31    asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array
+Rule 32    asignacion_multiple -> LET variables_assign SEMICOLON
+Rule 33    asignacion_multiple -> VAR variables_assign SEMICOLON
+Rule 34    asignacion_multiple -> CONST variables_assign SEMICOLON
+Rule 35    asignacion_multiple_sin_semicolon -> LET variables_assign
+Rule 36    asignacion_multiple_sin_semicolon -> VAR variables_assign
+Rule 37    asignacion_multiple_sin_semicolon -> CONST variables_assign
+Rule 38    variables_assign -> ID
+Rule 39    variables_assign -> variables_assign COMMA ID ASSIGN expresion
+Rule 40    variables_assign -> variables_assign COMMA ID
+Rule 41    mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN
+Rule 42    expresion -> valor
+Rule 43    expresion -> ID
+Rule 44    expresion_array -> LBRACKET RBRACKET
+Rule 45    expresion_array -> LBRACKET elementos RBRACKET
+Rule 46    elementos -> expresion
+Rule 47    elementos -> elementos COMMA expresion
+Rule 48    expresion -> ID LBRACKET NUM RBRACKET
+Rule 49    objeto_array -> LBRACKET LBRACE RBRACE RBRACKET
+Rule 50    objeto_array -> LBRACKET objetos RBRACKET
+Rule 51    objetos -> objeto
+Rule 52    objetos -> objetos COMMA objeto
+Rule 53    objeto -> LBRACE propiedades RBRACE
+Rule 54    propiedades -> propiedad
+Rule 55    propiedades -> propiedades COMMA propiedad
+Rule 56    propiedad -> ID COLON valor
+Rule 57    expresion -> ID LBRACKET NUM RBRACKET PUNTO ID
+Rule 58    unario -> ID MINUSMINUS SEMICOLON
+Rule 59    unario -> ID PLUSPLUS SEMICOLON
+Rule 60    unario -> ID ASSIGN expresion SEMICOLON
+Rule 61    unario -> ID PLUSEQ expresion SEMICOLON
+Rule 62    unario -> ID MINUSEQ expresion SEMICOLON
+Rule 63    unario -> ID TIMESEQ expresion SEMICOLON
+Rule 64    unario -> ID DIVEQ expresion SEMICOLON
+Rule 65    unario -> ID POWEQ expresion SEMICOLON
+Rule 66    unario_sin_semicolon -> ID MINUSMINUS
+Rule 67    unario_sin_semicolon -> ID PLUSPLUS
+Rule 68    unario_sin_semicolon -> ID ASSIGN expresion
+Rule 69    unario_sin_semicolon -> ID PLUSEQ expresion
+Rule 70    unario_sin_semicolon -> ID MINUSEQ expresion
+Rule 71    unario_sin_semicolon -> ID TIMESEQ expresion
+Rule 72    unario_sin_semicolon -> ID DIVEQ expresion
+Rule 73    unario_sin_semicolon -> ID POWEQ expresion
+Rule 74    expresion -> expresion OPERADOR expresion
+Rule 75    valor -> NUM
+Rule 76    valor -> STRING
+Rule 77    condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+Rule 78    else_block -> ELSE LBRACE declaraciones RBRACE
+Rule 79    else_block -> empty
+Rule 80    else_if_blocks -> empty
+Rule 81    else_if_blocks -> else_if_blocks else_if_block
+Rule 82    else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE
+Rule 83    comparacion -> expresion EQUAL expresion
+Rule 84    comparacion -> expresion LESS expresion
+Rule 85    comparacion -> expresion GREATER expresion
+Rule 86    comparacion -> expresion LESSEQUAL expresion
+Rule 87    comparacion -> expresion GREATEQUAL expresion
+Rule 88    comparacion -> expresion NOTEQUAL expresion
+Rule 89    comparacion -> comparacion OR comparacion
+Rule 90    comparacion -> comparacion AND comparacion
+Rule 91    bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+Rule 92    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 90
+ASSIGN               : 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 39 60 68
+COLON                : 56
+COMMA                : 39 40 47 52 55
+CONSOLE              : 41
+CONST                : 16 18 21 25 27 30 34 37
+DIVEQ                : 64 72
+ELSE                 : 78 82
+EQUAL                : 83
+FOR                  : 91
+GREATEQUAL           : 87
+GREATER              : 85
+ID                   : 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 38 39 40 43 48 56 57 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73
+IF                   : 77 82
+LBRACE               : 49 53 77 78 82 91
+LBRACKET             : 44 45 48 49 50 57
+LESS                 : 84
+LESSEQUAL            : 86
+LET                  : 14 17 20 23 26 29 32 35
+LOG                  : 41
+LPAREN               : 41 77 82 91
+MINUSEQ              : 62 70
+MINUSMINUS           : 58 66
+NOTEQUAL             : 88
+NUM                  : 48 57 75
+OPERADOR             : 74
+OR                   : 89
+PLUSEQ               : 61 69
+PLUSPLUS             : 59 67
+POWEQ                : 65 73
+PUNTO                : 41 57
+RBRACE               : 49 53 77 78 82 91
+RBRACKET             : 44 45 48 49 50 57
+RPAREN               : 41 77 82 91
+SEMICOLON            : 14 15 16 17 18 19 20 21 22 32 33 34 58 59 60 61 62 63 64 65 91 91
+STRING               : 76
+TIMESEQ              : 63 71
+VAR                  : 15 19 22 24 28 31 33 36
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 7 91
+asignacion_multiple  : 5
+asignacion_multiple_sin_semicolon : 6
+asignacion_sin_semicolon : 8
+bucle_for            : 11
+comparacion          : 77 82 89 89 90 90 91
+condicional          : 10
+declaracion          : 3 4
+declaraciones        : 1 3 77 78 82 91
+elementos            : 45 47
+else_block           : 77
+else_if_block        : 81
+else_if_blocks       : 77 81
+empty                : 2 79 80
+expresion            : 14 15 16 23 24 25 39 41 46 47 60 61 62 63 64 65 68 69 70 71 72 73 74 74 83 83 84 84 85 85 86 86 87 87 88 88
+expresion_array      : 17 18 19 26 27 28
+mostrar              : 9
+objeto               : 51 52
+objeto_array         : 20 21 22 29 30 31
+objetos              : 50 52
+programa             : 0
+propiedad            : 54 55
+propiedades          : 53 55
+unario               : 12 91
+unario_sin_semicolon : 13
+valor                : 42 56
+variables_assign     : 32 33 34 35 36 37 39 40
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . declaraciones
+    (2) programa -> . empty
+    (3) declaraciones -> . declaraciones declaracion
+    (4) declaraciones -> . declaracion
+    (92) empty -> .
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    $end            reduce using rule 92 (empty -> .)
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    programa                       shift and go to state 1
+    declaraciones                  shift and go to state 2
+    empty                          shift and go to state 3
+    declaracion                    shift and go to state 4
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> declaraciones .
+    (3) declaraciones -> declaraciones . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    $end            reduce using rule 1 (programa -> declaraciones .)
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    declaracion                    shift and go to state 21
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 3
+
+    (2) programa -> empty .
+
+    $end            reduce using rule 2 (programa -> empty .)
+
+
+state 4
+
+    (4) declaraciones -> declaracion .
+
+    LET             reduce using rule 4 (declaraciones -> declaracion .)
+    VAR             reduce using rule 4 (declaraciones -> declaracion .)
+    CONST           reduce using rule 4 (declaraciones -> declaracion .)
+    CONSOLE         reduce using rule 4 (declaraciones -> declaracion .)
+    IF              reduce using rule 4 (declaraciones -> declaracion .)
+    FOR             reduce using rule 4 (declaraciones -> declaracion .)
+    ID              reduce using rule 4 (declaraciones -> declaracion .)
+    $end            reduce using rule 4 (declaraciones -> declaracion .)
+    RBRACE          reduce using rule 4 (declaraciones -> declaracion .)
+
+
+state 5
+
+    (5) declaracion -> asignacion_multiple .
+
+    LET             reduce using rule 5 (declaracion -> asignacion_multiple .)
+    VAR             reduce using rule 5 (declaracion -> asignacion_multiple .)
+    CONST           reduce using rule 5 (declaracion -> asignacion_multiple .)
+    CONSOLE         reduce using rule 5 (declaracion -> asignacion_multiple .)
+    IF              reduce using rule 5 (declaracion -> asignacion_multiple .)
+    FOR             reduce using rule 5 (declaracion -> asignacion_multiple .)
+    ID              reduce using rule 5 (declaracion -> asignacion_multiple .)
+    $end            reduce using rule 5 (declaracion -> asignacion_multiple .)
+    RBRACE          reduce using rule 5 (declaracion -> asignacion_multiple .)
+
+
+state 6
+
+    (6) declaracion -> asignacion_multiple_sin_semicolon .
+
+    LET             reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    VAR             reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    CONST           reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    CONSOLE         reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    IF              reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    FOR             reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    ID              reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    $end            reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+    RBRACE          reduce using rule 6 (declaracion -> asignacion_multiple_sin_semicolon .)
+
+
+state 7
+
+    (7) declaracion -> asignacion .
+
+    LET             reduce using rule 7 (declaracion -> asignacion .)
+    VAR             reduce using rule 7 (declaracion -> asignacion .)
+    CONST           reduce using rule 7 (declaracion -> asignacion .)
+    CONSOLE         reduce using rule 7 (declaracion -> asignacion .)
+    IF              reduce using rule 7 (declaracion -> asignacion .)
+    FOR             reduce using rule 7 (declaracion -> asignacion .)
+    ID              reduce using rule 7 (declaracion -> asignacion .)
+    $end            reduce using rule 7 (declaracion -> asignacion .)
+    RBRACE          reduce using rule 7 (declaracion -> asignacion .)
+
+
+state 8
+
+    (8) declaracion -> asignacion_sin_semicolon .
+
+    LET             reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    VAR             reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    CONST           reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    CONSOLE         reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    IF              reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    FOR             reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    ID              reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    $end            reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+    RBRACE          reduce using rule 8 (declaracion -> asignacion_sin_semicolon .)
+
+
+state 9
+
+    (9) declaracion -> mostrar .
+
+    LET             reduce using rule 9 (declaracion -> mostrar .)
+    VAR             reduce using rule 9 (declaracion -> mostrar .)
+    CONST           reduce using rule 9 (declaracion -> mostrar .)
+    CONSOLE         reduce using rule 9 (declaracion -> mostrar .)
+    IF              reduce using rule 9 (declaracion -> mostrar .)
+    FOR             reduce using rule 9 (declaracion -> mostrar .)
+    ID              reduce using rule 9 (declaracion -> mostrar .)
+    $end            reduce using rule 9 (declaracion -> mostrar .)
+    RBRACE          reduce using rule 9 (declaracion -> mostrar .)
+
+
+state 10
+
+    (10) declaracion -> condicional .
+
+    LET             reduce using rule 10 (declaracion -> condicional .)
+    VAR             reduce using rule 10 (declaracion -> condicional .)
+    CONST           reduce using rule 10 (declaracion -> condicional .)
+    CONSOLE         reduce using rule 10 (declaracion -> condicional .)
+    IF              reduce using rule 10 (declaracion -> condicional .)
+    FOR             reduce using rule 10 (declaracion -> condicional .)
+    ID              reduce using rule 10 (declaracion -> condicional .)
+    $end            reduce using rule 10 (declaracion -> condicional .)
+    RBRACE          reduce using rule 10 (declaracion -> condicional .)
+
+
+state 11
+
+    (11) declaracion -> bucle_for .
+
+    LET             reduce using rule 11 (declaracion -> bucle_for .)
+    VAR             reduce using rule 11 (declaracion -> bucle_for .)
+    CONST           reduce using rule 11 (declaracion -> bucle_for .)
+    CONSOLE         reduce using rule 11 (declaracion -> bucle_for .)
+    IF              reduce using rule 11 (declaracion -> bucle_for .)
+    FOR             reduce using rule 11 (declaracion -> bucle_for .)
+    ID              reduce using rule 11 (declaracion -> bucle_for .)
+    $end            reduce using rule 11 (declaracion -> bucle_for .)
+    RBRACE          reduce using rule 11 (declaracion -> bucle_for .)
+
+
+state 12
+
+    (12) declaracion -> unario .
+
+    LET             reduce using rule 12 (declaracion -> unario .)
+    VAR             reduce using rule 12 (declaracion -> unario .)
+    CONST           reduce using rule 12 (declaracion -> unario .)
+    CONSOLE         reduce using rule 12 (declaracion -> unario .)
+    IF              reduce using rule 12 (declaracion -> unario .)
+    FOR             reduce using rule 12 (declaracion -> unario .)
+    ID              reduce using rule 12 (declaracion -> unario .)
+    $end            reduce using rule 12 (declaracion -> unario .)
+    RBRACE          reduce using rule 12 (declaracion -> unario .)
+
+
+state 13
+
+    (13) declaracion -> unario_sin_semicolon .
+
+    LET             reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    VAR             reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    CONST           reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    CONSOLE         reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    IF              reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    FOR             reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    ID              reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    $end            reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+    RBRACE          reduce using rule 13 (declaracion -> unario_sin_semicolon .)
+
+
+state 14
+
+    (32) asignacion_multiple -> LET . variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> LET . variables_assign
+    (14) asignacion -> LET . ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> LET . ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> LET . ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> LET . ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> LET . ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> LET . ID ASSIGN objeto_array
+    (38) variables_assign -> . ID
+    (39) variables_assign -> . variables_assign COMMA ID ASSIGN expresion
+    (40) variables_assign -> . variables_assign COMMA ID
+
+    ID              shift and go to state 23
+
+    variables_assign               shift and go to state 22
+
+state 15
+
+    (33) asignacion_multiple -> VAR . variables_assign SEMICOLON
+    (36) asignacion_multiple_sin_semicolon -> VAR . variables_assign
+    (15) asignacion -> VAR . ID ASSIGN expresion SEMICOLON
+    (19) asignacion -> VAR . ID ASSIGN expresion_array SEMICOLON
+    (22) asignacion -> VAR . ID ASSIGN objeto_array SEMICOLON
+    (24) asignacion_sin_semicolon -> VAR . ID ASSIGN expresion
+    (28) asignacion_sin_semicolon -> VAR . ID ASSIGN expresion_array
+    (31) asignacion_sin_semicolon -> VAR . ID ASSIGN objeto_array
+    (38) variables_assign -> . ID
+    (39) variables_assign -> . variables_assign COMMA ID ASSIGN expresion
+    (40) variables_assign -> . variables_assign COMMA ID
+
+    ID              shift and go to state 25
+
+    variables_assign               shift and go to state 24
+
+state 16
+
+    (34) asignacion_multiple -> CONST . variables_assign SEMICOLON
+    (37) asignacion_multiple_sin_semicolon -> CONST . variables_assign
+    (16) asignacion -> CONST . ID ASSIGN expresion SEMICOLON
+    (18) asignacion -> CONST . ID ASSIGN expresion_array SEMICOLON
+    (21) asignacion -> CONST . ID ASSIGN objeto_array SEMICOLON
+    (25) asignacion_sin_semicolon -> CONST . ID ASSIGN expresion
+    (27) asignacion_sin_semicolon -> CONST . ID ASSIGN expresion_array
+    (30) asignacion_sin_semicolon -> CONST . ID ASSIGN objeto_array
+    (38) variables_assign -> . ID
+    (39) variables_assign -> . variables_assign COMMA ID ASSIGN expresion
+    (40) variables_assign -> . variables_assign COMMA ID
+
+    ID              shift and go to state 27
+
+    variables_assign               shift and go to state 26
+
+state 17
+
+    (58) unario -> ID . MINUSMINUS SEMICOLON
+    (59) unario -> ID . PLUSPLUS SEMICOLON
+    (60) unario -> ID . ASSIGN expresion SEMICOLON
+    (61) unario -> ID . PLUSEQ expresion SEMICOLON
+    (62) unario -> ID . MINUSEQ expresion SEMICOLON
+    (63) unario -> ID . TIMESEQ expresion SEMICOLON
+    (64) unario -> ID . DIVEQ expresion SEMICOLON
+    (65) unario -> ID . POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> ID . MINUSMINUS
+    (67) unario_sin_semicolon -> ID . PLUSPLUS
+    (68) unario_sin_semicolon -> ID . ASSIGN expresion
+    (69) unario_sin_semicolon -> ID . PLUSEQ expresion
+    (70) unario_sin_semicolon -> ID . MINUSEQ expresion
+    (71) unario_sin_semicolon -> ID . TIMESEQ expresion
+    (72) unario_sin_semicolon -> ID . DIVEQ expresion
+    (73) unario_sin_semicolon -> ID . POWEQ expresion
+
+    MINUSMINUS      shift and go to state 28
+    PLUSPLUS        shift and go to state 29
+    ASSIGN          shift and go to state 30
+    PLUSEQ          shift and go to state 31
+    MINUSEQ         shift and go to state 32
+    TIMESEQ         shift and go to state 33
+    DIVEQ           shift and go to state 34
+    POWEQ           shift and go to state 35
+
+
+state 18
+
+    (41) mostrar -> CONSOLE . PUNTO LOG LPAREN expresion RPAREN
+
+    PUNTO           shift and go to state 36
+
+
+state 19
+
+    (77) condicional -> IF . LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+
+    LPAREN          shift and go to state 37
+
+
+state 20
+
+    (91) bucle_for -> FOR . LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+
+    LPAREN          shift and go to state 38
+
+
+state 21
+
+    (3) declaraciones -> declaraciones declaracion .
+
+    LET             reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    VAR             reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    CONST           reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    CONSOLE         reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    IF              reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    FOR             reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    ID              reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    $end            reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+    RBRACE          reduce using rule 3 (declaraciones -> declaraciones declaracion .)
+
+
+state 22
+
+    (32) asignacion_multiple -> LET variables_assign . SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> LET variables_assign .
+    (39) variables_assign -> variables_assign . COMMA ID ASSIGN expresion
+    (40) variables_assign -> variables_assign . COMMA ID
+
+    SEMICOLON       shift and go to state 39
+    LET             reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    VAR             reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    CONST           reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    CONSOLE         reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    IF              reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    FOR             reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    ID              reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    $end            reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    RBRACE          reduce using rule 35 (asignacion_multiple_sin_semicolon -> LET variables_assign .)
+    COMMA           shift and go to state 40
+
+
+state 23
+
+    (14) asignacion -> LET ID . ASSIGN expresion SEMICOLON
+    (17) asignacion -> LET ID . ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> LET ID . ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> LET ID . ASSIGN expresion
+    (26) asignacion_sin_semicolon -> LET ID . ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> LET ID . ASSIGN objeto_array
+    (38) variables_assign -> ID .
+
+    ASSIGN          shift and go to state 41
+    SEMICOLON       reduce using rule 38 (variables_assign -> ID .)
+    COMMA           reduce using rule 38 (variables_assign -> ID .)
+    LET             reduce using rule 38 (variables_assign -> ID .)
+    VAR             reduce using rule 38 (variables_assign -> ID .)
+    CONST           reduce using rule 38 (variables_assign -> ID .)
+    CONSOLE         reduce using rule 38 (variables_assign -> ID .)
+    IF              reduce using rule 38 (variables_assign -> ID .)
+    FOR             reduce using rule 38 (variables_assign -> ID .)
+    ID              reduce using rule 38 (variables_assign -> ID .)
+    $end            reduce using rule 38 (variables_assign -> ID .)
+    RBRACE          reduce using rule 38 (variables_assign -> ID .)
+
+
+state 24
+
+    (33) asignacion_multiple -> VAR variables_assign . SEMICOLON
+    (36) asignacion_multiple_sin_semicolon -> VAR variables_assign .
+    (39) variables_assign -> variables_assign . COMMA ID ASSIGN expresion
+    (40) variables_assign -> variables_assign . COMMA ID
+
+    SEMICOLON       shift and go to state 42
+    LET             reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    VAR             reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    CONST           reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    CONSOLE         reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    IF              reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    FOR             reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    ID              reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    $end            reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    RBRACE          reduce using rule 36 (asignacion_multiple_sin_semicolon -> VAR variables_assign .)
+    COMMA           shift and go to state 40
+
+
+state 25
+
+    (15) asignacion -> VAR ID . ASSIGN expresion SEMICOLON
+    (19) asignacion -> VAR ID . ASSIGN expresion_array SEMICOLON
+    (22) asignacion -> VAR ID . ASSIGN objeto_array SEMICOLON
+    (24) asignacion_sin_semicolon -> VAR ID . ASSIGN expresion
+    (28) asignacion_sin_semicolon -> VAR ID . ASSIGN expresion_array
+    (31) asignacion_sin_semicolon -> VAR ID . ASSIGN objeto_array
+    (38) variables_assign -> ID .
+
+    ASSIGN          shift and go to state 43
+    SEMICOLON       reduce using rule 38 (variables_assign -> ID .)
+    COMMA           reduce using rule 38 (variables_assign -> ID .)
+    LET             reduce using rule 38 (variables_assign -> ID .)
+    VAR             reduce using rule 38 (variables_assign -> ID .)
+    CONST           reduce using rule 38 (variables_assign -> ID .)
+    CONSOLE         reduce using rule 38 (variables_assign -> ID .)
+    IF              reduce using rule 38 (variables_assign -> ID .)
+    FOR             reduce using rule 38 (variables_assign -> ID .)
+    ID              reduce using rule 38 (variables_assign -> ID .)
+    $end            reduce using rule 38 (variables_assign -> ID .)
+    RBRACE          reduce using rule 38 (variables_assign -> ID .)
+
+
+state 26
+
+    (34) asignacion_multiple -> CONST variables_assign . SEMICOLON
+    (37) asignacion_multiple_sin_semicolon -> CONST variables_assign .
+    (39) variables_assign -> variables_assign . COMMA ID ASSIGN expresion
+    (40) variables_assign -> variables_assign . COMMA ID
+
+    SEMICOLON       shift and go to state 44
+    LET             reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    VAR             reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    CONST           reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    CONSOLE         reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    IF              reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    FOR             reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    ID              reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    $end            reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    RBRACE          reduce using rule 37 (asignacion_multiple_sin_semicolon -> CONST variables_assign .)
+    COMMA           shift and go to state 40
+
+
+state 27
+
+    (16) asignacion -> CONST ID . ASSIGN expresion SEMICOLON
+    (18) asignacion -> CONST ID . ASSIGN expresion_array SEMICOLON
+    (21) asignacion -> CONST ID . ASSIGN objeto_array SEMICOLON
+    (25) asignacion_sin_semicolon -> CONST ID . ASSIGN expresion
+    (27) asignacion_sin_semicolon -> CONST ID . ASSIGN expresion_array
+    (30) asignacion_sin_semicolon -> CONST ID . ASSIGN objeto_array
+    (38) variables_assign -> ID .
+
+    ASSIGN          shift and go to state 45
+    SEMICOLON       reduce using rule 38 (variables_assign -> ID .)
+    COMMA           reduce using rule 38 (variables_assign -> ID .)
+    LET             reduce using rule 38 (variables_assign -> ID .)
+    VAR             reduce using rule 38 (variables_assign -> ID .)
+    CONST           reduce using rule 38 (variables_assign -> ID .)
+    CONSOLE         reduce using rule 38 (variables_assign -> ID .)
+    IF              reduce using rule 38 (variables_assign -> ID .)
+    FOR             reduce using rule 38 (variables_assign -> ID .)
+    ID              reduce using rule 38 (variables_assign -> ID .)
+    $end            reduce using rule 38 (variables_assign -> ID .)
+    RBRACE          reduce using rule 38 (variables_assign -> ID .)
+
+
+state 28
+
+    (58) unario -> ID MINUSMINUS . SEMICOLON
+    (66) unario_sin_semicolon -> ID MINUSMINUS .
+
+    SEMICOLON       shift and go to state 46
+    LET             reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    VAR             reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    CONST           reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    CONSOLE         reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    IF              reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    FOR             reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    ID              reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    $end            reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+    RBRACE          reduce using rule 66 (unario_sin_semicolon -> ID MINUSMINUS .)
+
+
+state 29
+
+    (59) unario -> ID PLUSPLUS . SEMICOLON
+    (67) unario_sin_semicolon -> ID PLUSPLUS .
+
+    SEMICOLON       shift and go to state 47
+    LET             reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    VAR             reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    CONST           reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    CONSOLE         reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    IF              reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    FOR             reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    ID              reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    $end            reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+    RBRACE          reduce using rule 67 (unario_sin_semicolon -> ID PLUSPLUS .)
+
+
+state 30
+
+    (60) unario -> ID ASSIGN . expresion SEMICOLON
+    (68) unario_sin_semicolon -> ID ASSIGN . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 49
+    valor                          shift and go to state 50
+
+state 31
+
+    (61) unario -> ID PLUSEQ . expresion SEMICOLON
+    (69) unario_sin_semicolon -> ID PLUSEQ . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 53
+    valor                          shift and go to state 50
+
+state 32
+
+    (62) unario -> ID MINUSEQ . expresion SEMICOLON
+    (70) unario_sin_semicolon -> ID MINUSEQ . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 54
+    valor                          shift and go to state 50
+
+state 33
+
+    (63) unario -> ID TIMESEQ . expresion SEMICOLON
+    (71) unario_sin_semicolon -> ID TIMESEQ . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 55
+    valor                          shift and go to state 50
+
+state 34
+
+    (64) unario -> ID DIVEQ . expresion SEMICOLON
+    (72) unario_sin_semicolon -> ID DIVEQ . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 56
+    valor                          shift and go to state 50
+
+state 35
+
+    (65) unario -> ID POWEQ . expresion SEMICOLON
+    (73) unario_sin_semicolon -> ID POWEQ . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 57
+    valor                          shift and go to state 50
+
+state 36
+
+    (41) mostrar -> CONSOLE PUNTO . LOG LPAREN expresion RPAREN
+
+    LOG             shift and go to state 58
+
+
+state 37
+
+    (77) condicional -> IF LPAREN . comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (83) comparacion -> . expresion EQUAL expresion
+    (84) comparacion -> . expresion LESS expresion
+    (85) comparacion -> . expresion GREATER expresion
+    (86) comparacion -> . expresion LESSEQUAL expresion
+    (87) comparacion -> . expresion GREATEQUAL expresion
+    (88) comparacion -> . expresion NOTEQUAL expresion
+    (89) comparacion -> . comparacion OR comparacion
+    (90) comparacion -> . comparacion AND comparacion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    comparacion                    shift and go to state 59
+    expresion                      shift and go to state 60
+    valor                          shift and go to state 50
+
+state 38
+
+    (91) bucle_for -> FOR LPAREN . asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+
+    LET             shift and go to state 62
+    VAR             shift and go to state 63
+    CONST           shift and go to state 64
+
+    asignacion                     shift and go to state 61
+
+state 39
+
+    (32) asignacion_multiple -> LET variables_assign SEMICOLON .
+
+    LET             reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    VAR             reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    CONST           reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    CONSOLE         reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    IF              reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    FOR             reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    ID              reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    $end            reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+    RBRACE          reduce using rule 32 (asignacion_multiple -> LET variables_assign SEMICOLON .)
+
+
+state 40
+
+    (39) variables_assign -> variables_assign COMMA . ID ASSIGN expresion
+    (40) variables_assign -> variables_assign COMMA . ID
+
+    ID              shift and go to state 65
+
+
+state 41
+
+    (14) asignacion -> LET ID ASSIGN . expresion SEMICOLON
+    (17) asignacion -> LET ID ASSIGN . expresion_array SEMICOLON
+    (20) asignacion -> LET ID ASSIGN . objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> LET ID ASSIGN . expresion
+    (26) asignacion_sin_semicolon -> LET ID ASSIGN . expresion_array
+    (29) asignacion_sin_semicolon -> LET ID ASSIGN . objeto_array
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (44) expresion_array -> . LBRACKET RBRACKET
+    (45) expresion_array -> . LBRACKET elementos RBRACKET
+    (49) objeto_array -> . LBRACKET LBRACE RBRACE RBRACKET
+    (50) objeto_array -> . LBRACKET objetos RBRACKET
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    LBRACKET        shift and go to state 69
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 66
+    expresion_array                shift and go to state 67
+    objeto_array                   shift and go to state 68
+    valor                          shift and go to state 50
+
+state 42
+
+    (33) asignacion_multiple -> VAR variables_assign SEMICOLON .
+
+    LET             reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    VAR             reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    CONST           reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    CONSOLE         reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    IF              reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    FOR             reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    ID              reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    $end            reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+    RBRACE          reduce using rule 33 (asignacion_multiple -> VAR variables_assign SEMICOLON .)
+
+
+state 43
+
+    (15) asignacion -> VAR ID ASSIGN . expresion SEMICOLON
+    (19) asignacion -> VAR ID ASSIGN . expresion_array SEMICOLON
+    (22) asignacion -> VAR ID ASSIGN . objeto_array SEMICOLON
+    (24) asignacion_sin_semicolon -> VAR ID ASSIGN . expresion
+    (28) asignacion_sin_semicolon -> VAR ID ASSIGN . expresion_array
+    (31) asignacion_sin_semicolon -> VAR ID ASSIGN . objeto_array
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (44) expresion_array -> . LBRACKET RBRACKET
+    (45) expresion_array -> . LBRACKET elementos RBRACKET
+    (49) objeto_array -> . LBRACKET LBRACE RBRACE RBRACKET
+    (50) objeto_array -> . LBRACKET objetos RBRACKET
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    LBRACKET        shift and go to state 69
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 70
+    expresion_array                shift and go to state 71
+    objeto_array                   shift and go to state 72
+    valor                          shift and go to state 50
+
+state 44
+
+    (34) asignacion_multiple -> CONST variables_assign SEMICOLON .
+
+    LET             reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    VAR             reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    CONST           reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    CONSOLE         reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    IF              reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    FOR             reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    ID              reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    $end            reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+    RBRACE          reduce using rule 34 (asignacion_multiple -> CONST variables_assign SEMICOLON .)
+
+
+state 45
+
+    (16) asignacion -> CONST ID ASSIGN . expresion SEMICOLON
+    (18) asignacion -> CONST ID ASSIGN . expresion_array SEMICOLON
+    (21) asignacion -> CONST ID ASSIGN . objeto_array SEMICOLON
+    (25) asignacion_sin_semicolon -> CONST ID ASSIGN . expresion
+    (27) asignacion_sin_semicolon -> CONST ID ASSIGN . expresion_array
+    (30) asignacion_sin_semicolon -> CONST ID ASSIGN . objeto_array
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (44) expresion_array -> . LBRACKET RBRACKET
+    (45) expresion_array -> . LBRACKET elementos RBRACKET
+    (49) objeto_array -> . LBRACKET LBRACE RBRACE RBRACKET
+    (50) objeto_array -> . LBRACKET objetos RBRACKET
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    LBRACKET        shift and go to state 69
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 73
+    expresion_array                shift and go to state 74
+    objeto_array                   shift and go to state 75
+    valor                          shift and go to state 50
+
+state 46
+
+    (58) unario -> ID MINUSMINUS SEMICOLON .
+
+    LET             reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    VAR             reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    CONST           reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    CONSOLE         reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    IF              reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    FOR             reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    ID              reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    $end            reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    RBRACE          reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+    RPAREN          reduce using rule 58 (unario -> ID MINUSMINUS SEMICOLON .)
+
+
+state 47
+
+    (59) unario -> ID PLUSPLUS SEMICOLON .
+
+    LET             reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    VAR             reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    CONST           reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    CONSOLE         reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    IF              reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    FOR             reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    ID              reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    $end            reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    RBRACE          reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+    RPAREN          reduce using rule 59 (unario -> ID PLUSPLUS SEMICOLON .)
+
+
+state 48
+
+    (43) expresion -> ID .
+    (48) expresion -> ID . LBRACKET NUM RBRACKET
+    (57) expresion -> ID . LBRACKET NUM RBRACKET PUNTO ID
+
+    SEMICOLON       reduce using rule 43 (expresion -> ID .)
+    OPERADOR        reduce using rule 43 (expresion -> ID .)
+    LET             reduce using rule 43 (expresion -> ID .)
+    VAR             reduce using rule 43 (expresion -> ID .)
+    CONST           reduce using rule 43 (expresion -> ID .)
+    CONSOLE         reduce using rule 43 (expresion -> ID .)
+    IF              reduce using rule 43 (expresion -> ID .)
+    FOR             reduce using rule 43 (expresion -> ID .)
+    ID              reduce using rule 43 (expresion -> ID .)
+    $end            reduce using rule 43 (expresion -> ID .)
+    RBRACE          reduce using rule 43 (expresion -> ID .)
+    EQUAL           reduce using rule 43 (expresion -> ID .)
+    LESS            reduce using rule 43 (expresion -> ID .)
+    GREATER         reduce using rule 43 (expresion -> ID .)
+    LESSEQUAL       reduce using rule 43 (expresion -> ID .)
+    GREATEQUAL      reduce using rule 43 (expresion -> ID .)
+    NOTEQUAL        reduce using rule 43 (expresion -> ID .)
+    RBRACKET        reduce using rule 43 (expresion -> ID .)
+    COMMA           reduce using rule 43 (expresion -> ID .)
+    RPAREN          reduce using rule 43 (expresion -> ID .)
+    OR              reduce using rule 43 (expresion -> ID .)
+    AND             reduce using rule 43 (expresion -> ID .)
+    LBRACKET        shift and go to state 76
+
+
+state 49
+
+    (60) unario -> ID ASSIGN expresion . SEMICOLON
+    (68) unario_sin_semicolon -> ID ASSIGN expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 77
+    LET             reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    VAR             reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    CONST           reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    CONSOLE         reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    IF              reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    FOR             reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    ID              reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    $end            reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    RBRACE          reduce using rule 68 (unario_sin_semicolon -> ID ASSIGN expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 50
+
+    (42) expresion -> valor .
+
+    SEMICOLON       reduce using rule 42 (expresion -> valor .)
+    OPERADOR        reduce using rule 42 (expresion -> valor .)
+    LET             reduce using rule 42 (expresion -> valor .)
+    VAR             reduce using rule 42 (expresion -> valor .)
+    CONST           reduce using rule 42 (expresion -> valor .)
+    CONSOLE         reduce using rule 42 (expresion -> valor .)
+    IF              reduce using rule 42 (expresion -> valor .)
+    FOR             reduce using rule 42 (expresion -> valor .)
+    ID              reduce using rule 42 (expresion -> valor .)
+    $end            reduce using rule 42 (expresion -> valor .)
+    RBRACE          reduce using rule 42 (expresion -> valor .)
+    EQUAL           reduce using rule 42 (expresion -> valor .)
+    LESS            reduce using rule 42 (expresion -> valor .)
+    GREATER         reduce using rule 42 (expresion -> valor .)
+    LESSEQUAL       reduce using rule 42 (expresion -> valor .)
+    GREATEQUAL      reduce using rule 42 (expresion -> valor .)
+    NOTEQUAL        reduce using rule 42 (expresion -> valor .)
+    RBRACKET        reduce using rule 42 (expresion -> valor .)
+    COMMA           reduce using rule 42 (expresion -> valor .)
+    RPAREN          reduce using rule 42 (expresion -> valor .)
+    OR              reduce using rule 42 (expresion -> valor .)
+    AND             reduce using rule 42 (expresion -> valor .)
+
+
+state 51
+
+    (75) valor -> NUM .
+
+    SEMICOLON       reduce using rule 75 (valor -> NUM .)
+    OPERADOR        reduce using rule 75 (valor -> NUM .)
+    LET             reduce using rule 75 (valor -> NUM .)
+    VAR             reduce using rule 75 (valor -> NUM .)
+    CONST           reduce using rule 75 (valor -> NUM .)
+    CONSOLE         reduce using rule 75 (valor -> NUM .)
+    IF              reduce using rule 75 (valor -> NUM .)
+    FOR             reduce using rule 75 (valor -> NUM .)
+    ID              reduce using rule 75 (valor -> NUM .)
+    $end            reduce using rule 75 (valor -> NUM .)
+    RBRACE          reduce using rule 75 (valor -> NUM .)
+    EQUAL           reduce using rule 75 (valor -> NUM .)
+    LESS            reduce using rule 75 (valor -> NUM .)
+    GREATER         reduce using rule 75 (valor -> NUM .)
+    LESSEQUAL       reduce using rule 75 (valor -> NUM .)
+    GREATEQUAL      reduce using rule 75 (valor -> NUM .)
+    NOTEQUAL        reduce using rule 75 (valor -> NUM .)
+    RBRACKET        reduce using rule 75 (valor -> NUM .)
+    COMMA           reduce using rule 75 (valor -> NUM .)
+    RPAREN          reduce using rule 75 (valor -> NUM .)
+    OR              reduce using rule 75 (valor -> NUM .)
+    AND             reduce using rule 75 (valor -> NUM .)
+
+
+state 52
+
+    (76) valor -> STRING .
+
+    SEMICOLON       reduce using rule 76 (valor -> STRING .)
+    OPERADOR        reduce using rule 76 (valor -> STRING .)
+    LET             reduce using rule 76 (valor -> STRING .)
+    VAR             reduce using rule 76 (valor -> STRING .)
+    CONST           reduce using rule 76 (valor -> STRING .)
+    CONSOLE         reduce using rule 76 (valor -> STRING .)
+    IF              reduce using rule 76 (valor -> STRING .)
+    FOR             reduce using rule 76 (valor -> STRING .)
+    ID              reduce using rule 76 (valor -> STRING .)
+    $end            reduce using rule 76 (valor -> STRING .)
+    RBRACE          reduce using rule 76 (valor -> STRING .)
+    EQUAL           reduce using rule 76 (valor -> STRING .)
+    LESS            reduce using rule 76 (valor -> STRING .)
+    GREATER         reduce using rule 76 (valor -> STRING .)
+    LESSEQUAL       reduce using rule 76 (valor -> STRING .)
+    GREATEQUAL      reduce using rule 76 (valor -> STRING .)
+    NOTEQUAL        reduce using rule 76 (valor -> STRING .)
+    RBRACKET        reduce using rule 76 (valor -> STRING .)
+    COMMA           reduce using rule 76 (valor -> STRING .)
+    RPAREN          reduce using rule 76 (valor -> STRING .)
+    OR              reduce using rule 76 (valor -> STRING .)
+    AND             reduce using rule 76 (valor -> STRING .)
+
+
+state 53
+
+    (61) unario -> ID PLUSEQ expresion . SEMICOLON
+    (69) unario_sin_semicolon -> ID PLUSEQ expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 79
+    LET             reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    VAR             reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    CONST           reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    CONSOLE         reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    IF              reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    FOR             reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    ID              reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    $end            reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    RBRACE          reduce using rule 69 (unario_sin_semicolon -> ID PLUSEQ expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 54
+
+    (62) unario -> ID MINUSEQ expresion . SEMICOLON
+    (70) unario_sin_semicolon -> ID MINUSEQ expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 80
+    LET             reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    VAR             reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    CONST           reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    CONSOLE         reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    IF              reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    FOR             reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    ID              reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    $end            reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    RBRACE          reduce using rule 70 (unario_sin_semicolon -> ID MINUSEQ expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 55
+
+    (63) unario -> ID TIMESEQ expresion . SEMICOLON
+    (71) unario_sin_semicolon -> ID TIMESEQ expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 81
+    LET             reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    VAR             reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    CONST           reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    CONSOLE         reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    IF              reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    FOR             reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    ID              reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    $end            reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    RBRACE          reduce using rule 71 (unario_sin_semicolon -> ID TIMESEQ expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 56
+
+    (64) unario -> ID DIVEQ expresion . SEMICOLON
+    (72) unario_sin_semicolon -> ID DIVEQ expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 82
+    LET             reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    VAR             reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    CONST           reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    CONSOLE         reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    IF              reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    FOR             reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    ID              reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    $end            reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    RBRACE          reduce using rule 72 (unario_sin_semicolon -> ID DIVEQ expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 57
+
+    (65) unario -> ID POWEQ expresion . SEMICOLON
+    (73) unario_sin_semicolon -> ID POWEQ expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 83
+    LET             reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    VAR             reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    CONST           reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    CONSOLE         reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    IF              reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    FOR             reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    ID              reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    $end            reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    RBRACE          reduce using rule 73 (unario_sin_semicolon -> ID POWEQ expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 58
+
+    (41) mostrar -> CONSOLE PUNTO LOG . LPAREN expresion RPAREN
+
+    LPAREN          shift and go to state 84
+
+
+state 59
+
+    (77) condicional -> IF LPAREN comparacion . RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (89) comparacion -> comparacion . OR comparacion
+    (90) comparacion -> comparacion . AND comparacion
+
+    RPAREN          shift and go to state 85
+    OR              shift and go to state 86
+    AND             shift and go to state 87
+
+
+state 60
+
+    (83) comparacion -> expresion . EQUAL expresion
+    (84) comparacion -> expresion . LESS expresion
+    (85) comparacion -> expresion . GREATER expresion
+    (86) comparacion -> expresion . LESSEQUAL expresion
+    (87) comparacion -> expresion . GREATEQUAL expresion
+    (88) comparacion -> expresion . NOTEQUAL expresion
+    (74) expresion -> expresion . OPERADOR expresion
+
+    EQUAL           shift and go to state 88
+    LESS            shift and go to state 89
+    GREATER         shift and go to state 90
+    LESSEQUAL       shift and go to state 91
+    GREATEQUAL      shift and go to state 92
+    NOTEQUAL        shift and go to state 93
+    OPERADOR        shift and go to state 78
+
+
+state 61
+
+    (91) bucle_for -> FOR LPAREN asignacion . SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+
+    SEMICOLON       shift and go to state 94
+
+
+state 62
+
+    (14) asignacion -> LET . ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> LET . ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> LET . ID ASSIGN objeto_array SEMICOLON
+
+    ID              shift and go to state 95
+
+
+state 63
+
+    (15) asignacion -> VAR . ID ASSIGN expresion SEMICOLON
+    (19) asignacion -> VAR . ID ASSIGN expresion_array SEMICOLON
+    (22) asignacion -> VAR . ID ASSIGN objeto_array SEMICOLON
+
+    ID              shift and go to state 96
+
+
+state 64
+
+    (16) asignacion -> CONST . ID ASSIGN expresion SEMICOLON
+    (18) asignacion -> CONST . ID ASSIGN expresion_array SEMICOLON
+    (21) asignacion -> CONST . ID ASSIGN objeto_array SEMICOLON
+
+    ID              shift and go to state 97
+
+
+state 65
+
+    (39) variables_assign -> variables_assign COMMA ID . ASSIGN expresion
+    (40) variables_assign -> variables_assign COMMA ID .
+
+    ASSIGN          shift and go to state 98
+    SEMICOLON       reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    COMMA           reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    LET             reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    VAR             reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    CONST           reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    CONSOLE         reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    IF              reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    FOR             reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    ID              reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    $end            reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+    RBRACE          reduce using rule 40 (variables_assign -> variables_assign COMMA ID .)
+
+
+state 66
+
+    (14) asignacion -> LET ID ASSIGN expresion . SEMICOLON
+    (23) asignacion_sin_semicolon -> LET ID ASSIGN expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 99
+    LET             reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    VAR             reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    CONST           reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    CONSOLE         reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    IF              reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    FOR             reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    ID              reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    $end            reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    RBRACE          reduce using rule 23 (asignacion_sin_semicolon -> LET ID ASSIGN expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 67
+
+    (17) asignacion -> LET ID ASSIGN expresion_array . SEMICOLON
+    (26) asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .
+
+    SEMICOLON       shift and go to state 100
+    LET             reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    VAR             reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    CONST           reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    CONSOLE         reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    IF              reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    FOR             reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    ID              reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    $end            reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+    RBRACE          reduce using rule 26 (asignacion_sin_semicolon -> LET ID ASSIGN expresion_array .)
+
+
+state 68
+
+    (20) asignacion -> LET ID ASSIGN objeto_array . SEMICOLON
+    (29) asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .
+
+    SEMICOLON       shift and go to state 101
+    LET             reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    VAR             reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    CONST           reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    CONSOLE         reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    IF              reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    FOR             reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    ID              reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    $end            reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+    RBRACE          reduce using rule 29 (asignacion_sin_semicolon -> LET ID ASSIGN objeto_array .)
+
+
+state 69
+
+    (44) expresion_array -> LBRACKET . RBRACKET
+    (45) expresion_array -> LBRACKET . elementos RBRACKET
+    (49) objeto_array -> LBRACKET . LBRACE RBRACE RBRACKET
+    (50) objeto_array -> LBRACKET . objetos RBRACKET
+    (46) elementos -> . expresion
+    (47) elementos -> . elementos COMMA expresion
+    (51) objetos -> . objeto
+    (52) objetos -> . objetos COMMA objeto
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (53) objeto -> . LBRACE propiedades RBRACE
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    RBRACKET        shift and go to state 102
+    LBRACE          shift and go to state 104
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    elementos                      shift and go to state 103
+    objetos                        shift and go to state 105
+    expresion                      shift and go to state 106
+    objeto                         shift and go to state 107
+    valor                          shift and go to state 50
+
+state 70
+
+    (15) asignacion -> VAR ID ASSIGN expresion . SEMICOLON
+    (24) asignacion_sin_semicolon -> VAR ID ASSIGN expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 108
+    LET             reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    VAR             reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    CONST           reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    CONSOLE         reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    IF              reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    FOR             reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    ID              reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    $end            reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    RBRACE          reduce using rule 24 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 71
+
+    (19) asignacion -> VAR ID ASSIGN expresion_array . SEMICOLON
+    (28) asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .
+
+    SEMICOLON       shift and go to state 109
+    LET             reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    VAR             reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    CONST           reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    CONSOLE         reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    IF              reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    FOR             reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    ID              reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    $end            reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+    RBRACE          reduce using rule 28 (asignacion_sin_semicolon -> VAR ID ASSIGN expresion_array .)
+
+
+state 72
+
+    (22) asignacion -> VAR ID ASSIGN objeto_array . SEMICOLON
+    (31) asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .
+
+    SEMICOLON       shift and go to state 110
+    LET             reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    VAR             reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    CONST           reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    CONSOLE         reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    IF              reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    FOR             reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    ID              reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    $end            reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+    RBRACE          reduce using rule 31 (asignacion_sin_semicolon -> VAR ID ASSIGN objeto_array .)
+
+
+state 73
+
+    (16) asignacion -> CONST ID ASSIGN expresion . SEMICOLON
+    (25) asignacion_sin_semicolon -> CONST ID ASSIGN expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 111
+    LET             reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    VAR             reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    CONST           reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    CONSOLE         reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    IF              reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    FOR             reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    ID              reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    $end            reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    RBRACE          reduce using rule 25 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 74
+
+    (18) asignacion -> CONST ID ASSIGN expresion_array . SEMICOLON
+    (27) asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .
+
+    SEMICOLON       shift and go to state 112
+    LET             reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    VAR             reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    CONST           reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    CONSOLE         reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    IF              reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    FOR             reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    ID              reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    $end            reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+    RBRACE          reduce using rule 27 (asignacion_sin_semicolon -> CONST ID ASSIGN expresion_array .)
+
+
+state 75
+
+    (21) asignacion -> CONST ID ASSIGN objeto_array . SEMICOLON
+    (30) asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .
+
+    SEMICOLON       shift and go to state 113
+    LET             reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    VAR             reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    CONST           reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    CONSOLE         reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    IF              reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    FOR             reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    ID              reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    $end            reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+    RBRACE          reduce using rule 30 (asignacion_sin_semicolon -> CONST ID ASSIGN objeto_array .)
+
+
+state 76
+
+    (48) expresion -> ID LBRACKET . NUM RBRACKET
+    (57) expresion -> ID LBRACKET . NUM RBRACKET PUNTO ID
+
+    NUM             shift and go to state 114
+
+
+state 77
+
+    (60) unario -> ID ASSIGN expresion SEMICOLON .
+
+    LET             reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    VAR             reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    CONST           reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    CONSOLE         reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    IF              reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    FOR             reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    ID              reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    $end            reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    RBRACE          reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+    RPAREN          reduce using rule 60 (unario -> ID ASSIGN expresion SEMICOLON .)
+
+
+state 78
+
+    (74) expresion -> expresion OPERADOR . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 115
+    valor                          shift and go to state 50
+
+state 79
+
+    (61) unario -> ID PLUSEQ expresion SEMICOLON .
+
+    LET             reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    VAR             reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    CONST           reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    CONSOLE         reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    IF              reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    FOR             reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    ID              reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    $end            reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    RBRACE          reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+    RPAREN          reduce using rule 61 (unario -> ID PLUSEQ expresion SEMICOLON .)
+
+
+state 80
+
+    (62) unario -> ID MINUSEQ expresion SEMICOLON .
+
+    LET             reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    VAR             reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    CONST           reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    CONSOLE         reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    IF              reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    FOR             reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    ID              reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    $end            reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    RBRACE          reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+    RPAREN          reduce using rule 62 (unario -> ID MINUSEQ expresion SEMICOLON .)
+
+
+state 81
+
+    (63) unario -> ID TIMESEQ expresion SEMICOLON .
+
+    LET             reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    VAR             reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    CONST           reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    CONSOLE         reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    IF              reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    FOR             reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    ID              reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    $end            reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    RBRACE          reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+    RPAREN          reduce using rule 63 (unario -> ID TIMESEQ expresion SEMICOLON .)
+
+
+state 82
+
+    (64) unario -> ID DIVEQ expresion SEMICOLON .
+
+    LET             reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    VAR             reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    CONST           reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    CONSOLE         reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    IF              reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    FOR             reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    ID              reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    $end            reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    RBRACE          reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+    RPAREN          reduce using rule 64 (unario -> ID DIVEQ expresion SEMICOLON .)
+
+
+state 83
+
+    (65) unario -> ID POWEQ expresion SEMICOLON .
+
+    LET             reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    VAR             reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    CONST           reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    CONSOLE         reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    IF              reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    FOR             reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    ID              reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    $end            reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    RBRACE          reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+    RPAREN          reduce using rule 65 (unario -> ID POWEQ expresion SEMICOLON .)
+
+
+state 84
+
+    (41) mostrar -> CONSOLE PUNTO LOG LPAREN . expresion RPAREN
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 116
+    valor                          shift and go to state 50
+
+state 85
+
+    (77) condicional -> IF LPAREN comparacion RPAREN . LBRACE declaraciones RBRACE else_if_blocks else_block
+
+    LBRACE          shift and go to state 117
+
+
+state 86
+
+    (89) comparacion -> comparacion OR . comparacion
+    (83) comparacion -> . expresion EQUAL expresion
+    (84) comparacion -> . expresion LESS expresion
+    (85) comparacion -> . expresion GREATER expresion
+    (86) comparacion -> . expresion LESSEQUAL expresion
+    (87) comparacion -> . expresion GREATEQUAL expresion
+    (88) comparacion -> . expresion NOTEQUAL expresion
+    (89) comparacion -> . comparacion OR comparacion
+    (90) comparacion -> . comparacion AND comparacion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    comparacion                    shift and go to state 118
+    expresion                      shift and go to state 60
+    valor                          shift and go to state 50
+
+state 87
+
+    (90) comparacion -> comparacion AND . comparacion
+    (83) comparacion -> . expresion EQUAL expresion
+    (84) comparacion -> . expresion LESS expresion
+    (85) comparacion -> . expresion GREATER expresion
+    (86) comparacion -> . expresion LESSEQUAL expresion
+    (87) comparacion -> . expresion GREATEQUAL expresion
+    (88) comparacion -> . expresion NOTEQUAL expresion
+    (89) comparacion -> . comparacion OR comparacion
+    (90) comparacion -> . comparacion AND comparacion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    comparacion                    shift and go to state 119
+    expresion                      shift and go to state 60
+    valor                          shift and go to state 50
+
+state 88
+
+    (83) comparacion -> expresion EQUAL . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 120
+    valor                          shift and go to state 50
+
+state 89
+
+    (84) comparacion -> expresion LESS . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 121
+    valor                          shift and go to state 50
+
+state 90
+
+    (85) comparacion -> expresion GREATER . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 122
+    valor                          shift and go to state 50
+
+state 91
+
+    (86) comparacion -> expresion LESSEQUAL . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 123
+    valor                          shift and go to state 50
+
+state 92
+
+    (87) comparacion -> expresion GREATEQUAL . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 124
+    valor                          shift and go to state 50
+
+state 93
+
+    (88) comparacion -> expresion NOTEQUAL . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 125
+    valor                          shift and go to state 50
+
+state 94
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON . comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (83) comparacion -> . expresion EQUAL expresion
+    (84) comparacion -> . expresion LESS expresion
+    (85) comparacion -> . expresion GREATER expresion
+    (86) comparacion -> . expresion LESSEQUAL expresion
+    (87) comparacion -> . expresion GREATEQUAL expresion
+    (88) comparacion -> . expresion NOTEQUAL expresion
+    (89) comparacion -> . comparacion OR comparacion
+    (90) comparacion -> . comparacion AND comparacion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    comparacion                    shift and go to state 126
+    expresion                      shift and go to state 60
+    valor                          shift and go to state 50
+
+state 95
+
+    (14) asignacion -> LET ID . ASSIGN expresion SEMICOLON
+    (17) asignacion -> LET ID . ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> LET ID . ASSIGN objeto_array SEMICOLON
+
+    ASSIGN          shift and go to state 127
+
+
+state 96
+
+    (15) asignacion -> VAR ID . ASSIGN expresion SEMICOLON
+    (19) asignacion -> VAR ID . ASSIGN expresion_array SEMICOLON
+    (22) asignacion -> VAR ID . ASSIGN objeto_array SEMICOLON
+
+    ASSIGN          shift and go to state 128
+
+
+state 97
+
+    (16) asignacion -> CONST ID . ASSIGN expresion SEMICOLON
+    (18) asignacion -> CONST ID . ASSIGN expresion_array SEMICOLON
+    (21) asignacion -> CONST ID . ASSIGN objeto_array SEMICOLON
+
+    ASSIGN          shift and go to state 129
+
+
+state 98
+
+    (39) variables_assign -> variables_assign COMMA ID ASSIGN . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 130
+    valor                          shift and go to state 50
+
+state 99
+
+    (14) asignacion -> LET ID ASSIGN expresion SEMICOLON .
+
+    LET             reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    VAR             reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    CONST           reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    CONSOLE         reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    IF              reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    FOR             reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    ID              reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    $end            reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    SEMICOLON       reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+    RBRACE          reduce using rule 14 (asignacion -> LET ID ASSIGN expresion SEMICOLON .)
+
+
+state 100
+
+    (17) asignacion -> LET ID ASSIGN expresion_array SEMICOLON .
+
+    LET             reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    VAR             reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    CONST           reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    CONSOLE         reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    IF              reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    FOR             reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    ID              reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    $end            reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    SEMICOLON       reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+    RBRACE          reduce using rule 17 (asignacion -> LET ID ASSIGN expresion_array SEMICOLON .)
+
+
+state 101
+
+    (20) asignacion -> LET ID ASSIGN objeto_array SEMICOLON .
+
+    LET             reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    VAR             reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    CONST           reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    CONSOLE         reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    IF              reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    FOR             reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    ID              reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    $end            reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    SEMICOLON       reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+    RBRACE          reduce using rule 20 (asignacion -> LET ID ASSIGN objeto_array SEMICOLON .)
+
+
+state 102
+
+    (44) expresion_array -> LBRACKET RBRACKET .
+
+    SEMICOLON       reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    LET             reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    VAR             reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    CONST           reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    CONSOLE         reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    IF              reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    FOR             reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    ID              reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    $end            reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+    RBRACE          reduce using rule 44 (expresion_array -> LBRACKET RBRACKET .)
+
+
+state 103
+
+    (45) expresion_array -> LBRACKET elementos . RBRACKET
+    (47) elementos -> elementos . COMMA expresion
+
+    RBRACKET        shift and go to state 131
+    COMMA           shift and go to state 132
+
+
+state 104
+
+    (49) objeto_array -> LBRACKET LBRACE . RBRACE RBRACKET
+    (53) objeto -> LBRACE . propiedades RBRACE
+    (54) propiedades -> . propiedad
+    (55) propiedades -> . propiedades COMMA propiedad
+    (56) propiedad -> . ID COLON valor
+
+    RBRACE          shift and go to state 133
+    ID              shift and go to state 136
+
+    propiedades                    shift and go to state 134
+    propiedad                      shift and go to state 135
+
+state 105
+
+    (50) objeto_array -> LBRACKET objetos . RBRACKET
+    (52) objetos -> objetos . COMMA objeto
+
+    RBRACKET        shift and go to state 137
+    COMMA           shift and go to state 138
+
+
+state 106
+
+    (46) elementos -> expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RBRACKET        reduce using rule 46 (elementos -> expresion .)
+    COMMA           reduce using rule 46 (elementos -> expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 107
+
+    (51) objetos -> objeto .
+
+    RBRACKET        reduce using rule 51 (objetos -> objeto .)
+    COMMA           reduce using rule 51 (objetos -> objeto .)
+
+
+state 108
+
+    (15) asignacion -> VAR ID ASSIGN expresion SEMICOLON .
+
+    LET             reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    VAR             reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    CONST           reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    CONSOLE         reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    IF              reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    FOR             reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    ID              reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    $end            reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    SEMICOLON       reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+    RBRACE          reduce using rule 15 (asignacion -> VAR ID ASSIGN expresion SEMICOLON .)
+
+
+state 109
+
+    (19) asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .
+
+    LET             reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    VAR             reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    CONST           reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    CONSOLE         reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    IF              reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    FOR             reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    ID              reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    $end            reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    SEMICOLON       reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+    RBRACE          reduce using rule 19 (asignacion -> VAR ID ASSIGN expresion_array SEMICOLON .)
+
+
+state 110
+
+    (22) asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .
+
+    LET             reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    VAR             reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    CONST           reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    CONSOLE         reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    IF              reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    FOR             reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    ID              reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    $end            reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    SEMICOLON       reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+    RBRACE          reduce using rule 22 (asignacion -> VAR ID ASSIGN objeto_array SEMICOLON .)
+
+
+state 111
+
+    (16) asignacion -> CONST ID ASSIGN expresion SEMICOLON .
+
+    LET             reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    VAR             reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    CONST           reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    CONSOLE         reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    IF              reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    FOR             reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    ID              reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    $end            reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    SEMICOLON       reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+    RBRACE          reduce using rule 16 (asignacion -> CONST ID ASSIGN expresion SEMICOLON .)
+
+
+state 112
+
+    (18) asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .
+
+    LET             reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    VAR             reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    CONST           reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    CONSOLE         reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    IF              reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    FOR             reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    ID              reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    $end            reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    SEMICOLON       reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+    RBRACE          reduce using rule 18 (asignacion -> CONST ID ASSIGN expresion_array SEMICOLON .)
+
+
+state 113
+
+    (21) asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .
+
+    LET             reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    VAR             reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    CONST           reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    CONSOLE         reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    IF              reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    FOR             reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    ID              reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    $end            reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    SEMICOLON       reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+    RBRACE          reduce using rule 21 (asignacion -> CONST ID ASSIGN objeto_array SEMICOLON .)
+
+
+state 114
+
+    (48) expresion -> ID LBRACKET NUM . RBRACKET
+    (57) expresion -> ID LBRACKET NUM . RBRACKET PUNTO ID
+
+    RBRACKET        shift and go to state 139
+
+
+state 115
+
+    (74) expresion -> expresion OPERADOR expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    OPERADOR        reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    LET             reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    VAR             reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    CONST           reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    CONSOLE         reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    IF              reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    FOR             reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    ID              reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    $end            reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    RBRACE          reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    EQUAL           reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    LESS            reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    GREATER         reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    LESSEQUAL       reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    GREATEQUAL      reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    NOTEQUAL        reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    RBRACKET        reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    COMMA           reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    RPAREN          reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    OR              reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+    AND             reduce using rule 74 (expresion -> expresion OPERADOR expresion .)
+
+  ! OPERADOR        [ shift and go to state 78 ]
+
+
+state 116
+
+    (41) mostrar -> CONSOLE PUNTO LOG LPAREN expresion . RPAREN
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RPAREN          shift and go to state 140
+    OPERADOR        shift and go to state 78
+
+
+state 117
+
+    (77) condicional -> IF LPAREN comparacion RPAREN LBRACE . declaraciones RBRACE else_if_blocks else_block
+    (3) declaraciones -> . declaraciones declaracion
+    (4) declaraciones -> . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    declaraciones                  shift and go to state 141
+    declaracion                    shift and go to state 4
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 118
+
+    (89) comparacion -> comparacion OR comparacion .
+    (89) comparacion -> comparacion . OR comparacion
+    (90) comparacion -> comparacion . AND comparacion
+
+    RPAREN          reduce using rule 89 (comparacion -> comparacion OR comparacion .)
+    OR              reduce using rule 89 (comparacion -> comparacion OR comparacion .)
+    SEMICOLON       reduce using rule 89 (comparacion -> comparacion OR comparacion .)
+    AND             shift and go to state 87
+
+  ! AND             [ reduce using rule 89 (comparacion -> comparacion OR comparacion .) ]
+  ! OR              [ shift and go to state 86 ]
+
+
+state 119
+
+    (90) comparacion -> comparacion AND comparacion .
+    (89) comparacion -> comparacion . OR comparacion
+    (90) comparacion -> comparacion . AND comparacion
+
+    RPAREN          reduce using rule 90 (comparacion -> comparacion AND comparacion .)
+    OR              reduce using rule 90 (comparacion -> comparacion AND comparacion .)
+    AND             reduce using rule 90 (comparacion -> comparacion AND comparacion .)
+    SEMICOLON       reduce using rule 90 (comparacion -> comparacion AND comparacion .)
+
+  ! OR              [ shift and go to state 86 ]
+  ! AND             [ shift and go to state 87 ]
+
+
+state 120
+
+    (83) comparacion -> expresion EQUAL expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RPAREN          reduce using rule 83 (comparacion -> expresion EQUAL expresion .)
+    OR              reduce using rule 83 (comparacion -> expresion EQUAL expresion .)
+    AND             reduce using rule 83 (comparacion -> expresion EQUAL expresion .)
+    SEMICOLON       reduce using rule 83 (comparacion -> expresion EQUAL expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 121
+
+    (84) comparacion -> expresion LESS expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RPAREN          reduce using rule 84 (comparacion -> expresion LESS expresion .)
+    OR              reduce using rule 84 (comparacion -> expresion LESS expresion .)
+    AND             reduce using rule 84 (comparacion -> expresion LESS expresion .)
+    SEMICOLON       reduce using rule 84 (comparacion -> expresion LESS expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 122
+
+    (85) comparacion -> expresion GREATER expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RPAREN          reduce using rule 85 (comparacion -> expresion GREATER expresion .)
+    OR              reduce using rule 85 (comparacion -> expresion GREATER expresion .)
+    AND             reduce using rule 85 (comparacion -> expresion GREATER expresion .)
+    SEMICOLON       reduce using rule 85 (comparacion -> expresion GREATER expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 123
+
+    (86) comparacion -> expresion LESSEQUAL expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RPAREN          reduce using rule 86 (comparacion -> expresion LESSEQUAL expresion .)
+    OR              reduce using rule 86 (comparacion -> expresion LESSEQUAL expresion .)
+    AND             reduce using rule 86 (comparacion -> expresion LESSEQUAL expresion .)
+    SEMICOLON       reduce using rule 86 (comparacion -> expresion LESSEQUAL expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 124
+
+    (87) comparacion -> expresion GREATEQUAL expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RPAREN          reduce using rule 87 (comparacion -> expresion GREATEQUAL expresion .)
+    OR              reduce using rule 87 (comparacion -> expresion GREATEQUAL expresion .)
+    AND             reduce using rule 87 (comparacion -> expresion GREATEQUAL expresion .)
+    SEMICOLON       reduce using rule 87 (comparacion -> expresion GREATEQUAL expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 125
+
+    (88) comparacion -> expresion NOTEQUAL expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RPAREN          reduce using rule 88 (comparacion -> expresion NOTEQUAL expresion .)
+    OR              reduce using rule 88 (comparacion -> expresion NOTEQUAL expresion .)
+    AND             reduce using rule 88 (comparacion -> expresion NOTEQUAL expresion .)
+    SEMICOLON       reduce using rule 88 (comparacion -> expresion NOTEQUAL expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 126
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion . SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (89) comparacion -> comparacion . OR comparacion
+    (90) comparacion -> comparacion . AND comparacion
+
+    SEMICOLON       shift and go to state 142
+    OR              shift and go to state 86
+    AND             shift and go to state 87
+
+
+state 127
+
+    (14) asignacion -> LET ID ASSIGN . expresion SEMICOLON
+    (17) asignacion -> LET ID ASSIGN . expresion_array SEMICOLON
+    (20) asignacion -> LET ID ASSIGN . objeto_array SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (44) expresion_array -> . LBRACKET RBRACKET
+    (45) expresion_array -> . LBRACKET elementos RBRACKET
+    (49) objeto_array -> . LBRACKET LBRACE RBRACE RBRACKET
+    (50) objeto_array -> . LBRACKET objetos RBRACKET
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    LBRACKET        shift and go to state 69
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 143
+    expresion_array                shift and go to state 144
+    objeto_array                   shift and go to state 145
+    valor                          shift and go to state 50
+
+state 128
+
+    (15) asignacion -> VAR ID ASSIGN . expresion SEMICOLON
+    (19) asignacion -> VAR ID ASSIGN . expresion_array SEMICOLON
+    (22) asignacion -> VAR ID ASSIGN . objeto_array SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (44) expresion_array -> . LBRACKET RBRACKET
+    (45) expresion_array -> . LBRACKET elementos RBRACKET
+    (49) objeto_array -> . LBRACKET LBRACE RBRACE RBRACKET
+    (50) objeto_array -> . LBRACKET objetos RBRACKET
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    LBRACKET        shift and go to state 69
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 146
+    expresion_array                shift and go to state 147
+    objeto_array                   shift and go to state 148
+    valor                          shift and go to state 50
+
+state 129
+
+    (16) asignacion -> CONST ID ASSIGN . expresion SEMICOLON
+    (18) asignacion -> CONST ID ASSIGN . expresion_array SEMICOLON
+    (21) asignacion -> CONST ID ASSIGN . objeto_array SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (44) expresion_array -> . LBRACKET RBRACKET
+    (45) expresion_array -> . LBRACKET elementos RBRACKET
+    (49) objeto_array -> . LBRACKET LBRACE RBRACE RBRACKET
+    (50) objeto_array -> . LBRACKET objetos RBRACKET
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    LBRACKET        shift and go to state 69
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 149
+    expresion_array                shift and go to state 150
+    objeto_array                   shift and go to state 151
+    valor                          shift and go to state 50
+
+state 130
+
+    (39) variables_assign -> variables_assign COMMA ID ASSIGN expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    COMMA           reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    LET             reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    VAR             reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    CONST           reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    CONSOLE         reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    IF              reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    FOR             reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    ID              reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    $end            reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    RBRACE          reduce using rule 39 (variables_assign -> variables_assign COMMA ID ASSIGN expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 131
+
+    (45) expresion_array -> LBRACKET elementos RBRACKET .
+
+    SEMICOLON       reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    LET             reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    VAR             reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    CONST           reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    CONSOLE         reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    IF              reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    FOR             reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    ID              reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    $end            reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+    RBRACE          reduce using rule 45 (expresion_array -> LBRACKET elementos RBRACKET .)
+
+
+state 132
+
+    (47) elementos -> elementos COMMA . expresion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 152
+    valor                          shift and go to state 50
+
+state 133
+
+    (49) objeto_array -> LBRACKET LBRACE RBRACE . RBRACKET
+
+    RBRACKET        shift and go to state 153
+
+
+state 134
+
+    (53) objeto -> LBRACE propiedades . RBRACE
+    (55) propiedades -> propiedades . COMMA propiedad
+
+    RBRACE          shift and go to state 154
+    COMMA           shift and go to state 155
+
+
+state 135
+
+    (54) propiedades -> propiedad .
+
+    RBRACE          reduce using rule 54 (propiedades -> propiedad .)
+    COMMA           reduce using rule 54 (propiedades -> propiedad .)
+
+
+state 136
+
+    (56) propiedad -> ID . COLON valor
+
+    COLON           shift and go to state 156
+
+
+state 137
+
+    (50) objeto_array -> LBRACKET objetos RBRACKET .
+
+    SEMICOLON       reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    LET             reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    VAR             reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    CONST           reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    CONSOLE         reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    IF              reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    FOR             reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    ID              reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    $end            reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+    RBRACE          reduce using rule 50 (objeto_array -> LBRACKET objetos RBRACKET .)
+
+
+state 138
+
+    (52) objetos -> objetos COMMA . objeto
+    (53) objeto -> . LBRACE propiedades RBRACE
+
+    LBRACE          shift and go to state 158
+
+    objeto                         shift and go to state 157
+
+state 139
+
+    (48) expresion -> ID LBRACKET NUM RBRACKET .
+    (57) expresion -> ID LBRACKET NUM RBRACKET . PUNTO ID
+
+    SEMICOLON       reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    OPERADOR        reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    LET             reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    VAR             reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    CONST           reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    CONSOLE         reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    IF              reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    FOR             reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    ID              reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    $end            reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    RBRACE          reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    EQUAL           reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    LESS            reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    GREATER         reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    LESSEQUAL       reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    GREATEQUAL      reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    NOTEQUAL        reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    RBRACKET        reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    COMMA           reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    RPAREN          reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    OR              reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    AND             reduce using rule 48 (expresion -> ID LBRACKET NUM RBRACKET .)
+    PUNTO           shift and go to state 159
+
+
+state 140
+
+    (41) mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .
+
+    LET             reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    VAR             reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    CONST           reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    CONSOLE         reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    IF              reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    FOR             reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    ID              reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    $end            reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+    RBRACE          reduce using rule 41 (mostrar -> CONSOLE PUNTO LOG LPAREN expresion RPAREN .)
+
+
+state 141
+
+    (77) condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones . RBRACE else_if_blocks else_block
+    (3) declaraciones -> declaraciones . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    RBRACE          shift and go to state 160
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    declaracion                    shift and go to state 21
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 142
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON . unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+
+    ID              shift and go to state 162
+
+    unario                         shift and go to state 161
+
+state 143
+
+    (14) asignacion -> LET ID ASSIGN expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 99
+    OPERADOR        shift and go to state 78
+
+
+state 144
+
+    (17) asignacion -> LET ID ASSIGN expresion_array . SEMICOLON
+
+    SEMICOLON       shift and go to state 100
+
+
+state 145
+
+    (20) asignacion -> LET ID ASSIGN objeto_array . SEMICOLON
+
+    SEMICOLON       shift and go to state 101
+
+
+state 146
+
+    (15) asignacion -> VAR ID ASSIGN expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 108
+    OPERADOR        shift and go to state 78
+
+
+state 147
+
+    (19) asignacion -> VAR ID ASSIGN expresion_array . SEMICOLON
+
+    SEMICOLON       shift and go to state 109
+
+
+state 148
+
+    (22) asignacion -> VAR ID ASSIGN objeto_array . SEMICOLON
+
+    SEMICOLON       shift and go to state 110
+
+
+state 149
+
+    (16) asignacion -> CONST ID ASSIGN expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 111
+    OPERADOR        shift and go to state 78
+
+
+state 150
+
+    (18) asignacion -> CONST ID ASSIGN expresion_array . SEMICOLON
+
+    SEMICOLON       shift and go to state 112
+
+
+state 151
+
+    (21) asignacion -> CONST ID ASSIGN objeto_array . SEMICOLON
+
+    SEMICOLON       shift and go to state 113
+
+
+state 152
+
+    (47) elementos -> elementos COMMA expresion .
+    (74) expresion -> expresion . OPERADOR expresion
+
+    RBRACKET        reduce using rule 47 (elementos -> elementos COMMA expresion .)
+    COMMA           reduce using rule 47 (elementos -> elementos COMMA expresion .)
+    OPERADOR        shift and go to state 78
+
+
+state 153
+
+    (49) objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .
+
+    SEMICOLON       reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    LET             reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    VAR             reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    CONST           reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    CONSOLE         reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    IF              reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    FOR             reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    ID              reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    $end            reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+    RBRACE          reduce using rule 49 (objeto_array -> LBRACKET LBRACE RBRACE RBRACKET .)
+
+
+state 154
+
+    (53) objeto -> LBRACE propiedades RBRACE .
+
+    RBRACKET        reduce using rule 53 (objeto -> LBRACE propiedades RBRACE .)
+    COMMA           reduce using rule 53 (objeto -> LBRACE propiedades RBRACE .)
+
+
+state 155
+
+    (55) propiedades -> propiedades COMMA . propiedad
+    (56) propiedad -> . ID COLON valor
+
+    ID              shift and go to state 136
+
+    propiedad                      shift and go to state 163
+
+state 156
+
+    (56) propiedad -> ID COLON . valor
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    valor                          shift and go to state 164
+
+state 157
+
+    (52) objetos -> objetos COMMA objeto .
+
+    RBRACKET        reduce using rule 52 (objetos -> objetos COMMA objeto .)
+    COMMA           reduce using rule 52 (objetos -> objetos COMMA objeto .)
+
+
+state 158
+
+    (53) objeto -> LBRACE . propiedades RBRACE
+    (54) propiedades -> . propiedad
+    (55) propiedades -> . propiedades COMMA propiedad
+    (56) propiedad -> . ID COLON valor
+
+    ID              shift and go to state 136
+
+    propiedades                    shift and go to state 134
+    propiedad                      shift and go to state 135
+
+state 159
+
+    (57) expresion -> ID LBRACKET NUM RBRACKET PUNTO . ID
+
+    ID              shift and go to state 165
+
+
+state 160
+
+    (77) condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE . else_if_blocks else_block
+    (80) else_if_blocks -> . empty
+    (81) else_if_blocks -> . else_if_blocks else_if_block
+    (92) empty -> .
+
+    ELSE            reduce using rule 92 (empty -> .)
+    LET             reduce using rule 92 (empty -> .)
+    VAR             reduce using rule 92 (empty -> .)
+    CONST           reduce using rule 92 (empty -> .)
+    CONSOLE         reduce using rule 92 (empty -> .)
+    IF              reduce using rule 92 (empty -> .)
+    FOR             reduce using rule 92 (empty -> .)
+    ID              reduce using rule 92 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
+    RBRACE          reduce using rule 92 (empty -> .)
+
+    else_if_blocks                 shift and go to state 166
+    empty                          shift and go to state 167
+
+state 161
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario . RPAREN LBRACE declaraciones RBRACE
+
+    RPAREN          shift and go to state 168
+
+
+state 162
+
+    (58) unario -> ID . MINUSMINUS SEMICOLON
+    (59) unario -> ID . PLUSPLUS SEMICOLON
+    (60) unario -> ID . ASSIGN expresion SEMICOLON
+    (61) unario -> ID . PLUSEQ expresion SEMICOLON
+    (62) unario -> ID . MINUSEQ expresion SEMICOLON
+    (63) unario -> ID . TIMESEQ expresion SEMICOLON
+    (64) unario -> ID . DIVEQ expresion SEMICOLON
+    (65) unario -> ID . POWEQ expresion SEMICOLON
+
+    MINUSMINUS      shift and go to state 169
+    PLUSPLUS        shift and go to state 170
+    ASSIGN          shift and go to state 171
+    PLUSEQ          shift and go to state 172
+    MINUSEQ         shift and go to state 173
+    TIMESEQ         shift and go to state 174
+    DIVEQ           shift and go to state 175
+    POWEQ           shift and go to state 176
+
+
+state 163
+
+    (55) propiedades -> propiedades COMMA propiedad .
+
+    RBRACE          reduce using rule 55 (propiedades -> propiedades COMMA propiedad .)
+    COMMA           reduce using rule 55 (propiedades -> propiedades COMMA propiedad .)
+
+
+state 164
+
+    (56) propiedad -> ID COLON valor .
+
+    RBRACE          reduce using rule 56 (propiedad -> ID COLON valor .)
+    COMMA           reduce using rule 56 (propiedad -> ID COLON valor .)
+
+
+state 165
+
+    (57) expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .
+
+    SEMICOLON       reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    OPERADOR        reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    LET             reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    VAR             reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    CONST           reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    CONSOLE         reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    IF              reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    FOR             reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    ID              reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    $end            reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    RBRACE          reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    EQUAL           reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    LESS            reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    GREATER         reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    LESSEQUAL       reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    GREATEQUAL      reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    NOTEQUAL        reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    RBRACKET        reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    COMMA           reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    RPAREN          reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    OR              reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+    AND             reduce using rule 57 (expresion -> ID LBRACKET NUM RBRACKET PUNTO ID .)
+
+
+state 166
+
+    (77) condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks . else_block
+    (81) else_if_blocks -> else_if_blocks . else_if_block
+    (78) else_block -> . ELSE LBRACE declaraciones RBRACE
+    (79) else_block -> . empty
+    (82) else_if_block -> . ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE
+    (92) empty -> .
+
+    ELSE            shift and go to state 179
+    LET             reduce using rule 92 (empty -> .)
+    VAR             reduce using rule 92 (empty -> .)
+    CONST           reduce using rule 92 (empty -> .)
+    CONSOLE         reduce using rule 92 (empty -> .)
+    IF              reduce using rule 92 (empty -> .)
+    FOR             reduce using rule 92 (empty -> .)
+    ID              reduce using rule 92 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
+    RBRACE          reduce using rule 92 (empty -> .)
+
+    else_block                     shift and go to state 177
+    else_if_block                  shift and go to state 178
+    empty                          shift and go to state 180
+
+state 167
+
+    (80) else_if_blocks -> empty .
+
+    ELSE            reduce using rule 80 (else_if_blocks -> empty .)
+    LET             reduce using rule 80 (else_if_blocks -> empty .)
+    VAR             reduce using rule 80 (else_if_blocks -> empty .)
+    CONST           reduce using rule 80 (else_if_blocks -> empty .)
+    CONSOLE         reduce using rule 80 (else_if_blocks -> empty .)
+    IF              reduce using rule 80 (else_if_blocks -> empty .)
+    FOR             reduce using rule 80 (else_if_blocks -> empty .)
+    ID              reduce using rule 80 (else_if_blocks -> empty .)
+    $end            reduce using rule 80 (else_if_blocks -> empty .)
+    RBRACE          reduce using rule 80 (else_if_blocks -> empty .)
+
+
+state 168
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN . LBRACE declaraciones RBRACE
+
+    LBRACE          shift and go to state 181
+
+
+state 169
+
+    (58) unario -> ID MINUSMINUS . SEMICOLON
+
+    SEMICOLON       shift and go to state 46
+
+
+state 170
+
+    (59) unario -> ID PLUSPLUS . SEMICOLON
+
+    SEMICOLON       shift and go to state 47
+
+
+state 171
+
+    (60) unario -> ID ASSIGN . expresion SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 182
+    valor                          shift and go to state 50
+
+state 172
+
+    (61) unario -> ID PLUSEQ . expresion SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 183
+    valor                          shift and go to state 50
+
+state 173
+
+    (62) unario -> ID MINUSEQ . expresion SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 184
+    valor                          shift and go to state 50
+
+state 174
+
+    (63) unario -> ID TIMESEQ . expresion SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 185
+    valor                          shift and go to state 50
+
+state 175
+
+    (64) unario -> ID DIVEQ . expresion SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 186
+    valor                          shift and go to state 50
+
+state 176
+
+    (65) unario -> ID POWEQ . expresion SEMICOLON
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    expresion                      shift and go to state 187
+    valor                          shift and go to state 50
+
+state 177
+
+    (77) condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .
+
+    LET             reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    VAR             reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    CONST           reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    CONSOLE         reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    IF              reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    FOR             reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    ID              reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    $end            reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+    RBRACE          reduce using rule 77 (condicional -> IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block .)
+
+
+state 178
+
+    (81) else_if_blocks -> else_if_blocks else_if_block .
+
+    ELSE            reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    LET             reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    VAR             reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    CONST           reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    CONSOLE         reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    IF              reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    FOR             reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    ID              reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    $end            reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+    RBRACE          reduce using rule 81 (else_if_blocks -> else_if_blocks else_if_block .)
+
+
+state 179
+
+    (78) else_block -> ELSE . LBRACE declaraciones RBRACE
+    (82) else_if_block -> ELSE . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE
+
+    LBRACE          shift and go to state 188
+    IF              shift and go to state 189
+
+
+state 180
+
+    (79) else_block -> empty .
+
+    LET             reduce using rule 79 (else_block -> empty .)
+    VAR             reduce using rule 79 (else_block -> empty .)
+    CONST           reduce using rule 79 (else_block -> empty .)
+    CONSOLE         reduce using rule 79 (else_block -> empty .)
+    IF              reduce using rule 79 (else_block -> empty .)
+    FOR             reduce using rule 79 (else_block -> empty .)
+    ID              reduce using rule 79 (else_block -> empty .)
+    $end            reduce using rule 79 (else_block -> empty .)
+    RBRACE          reduce using rule 79 (else_block -> empty .)
+
+
+state 181
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE . declaraciones RBRACE
+    (3) declaraciones -> . declaraciones declaracion
+    (4) declaraciones -> . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    asignacion                     shift and go to state 7
+    unario                         shift and go to state 12
+    declaraciones                  shift and go to state 190
+    declaracion                    shift and go to state 4
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario_sin_semicolon           shift and go to state 13
+
+state 182
+
+    (60) unario -> ID ASSIGN expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 77
+    OPERADOR        shift and go to state 78
+
+
+state 183
+
+    (61) unario -> ID PLUSEQ expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 79
+    OPERADOR        shift and go to state 78
+
+
+state 184
+
+    (62) unario -> ID MINUSEQ expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 80
+    OPERADOR        shift and go to state 78
+
+
+state 185
+
+    (63) unario -> ID TIMESEQ expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 81
+    OPERADOR        shift and go to state 78
+
+
+state 186
+
+    (64) unario -> ID DIVEQ expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 82
+    OPERADOR        shift and go to state 78
+
+
+state 187
+
+    (65) unario -> ID POWEQ expresion . SEMICOLON
+    (74) expresion -> expresion . OPERADOR expresion
+
+    SEMICOLON       shift and go to state 83
+    OPERADOR        shift and go to state 78
+
+
+state 188
+
+    (78) else_block -> ELSE LBRACE . declaraciones RBRACE
+    (3) declaraciones -> . declaraciones declaracion
+    (4) declaraciones -> . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    declaraciones                  shift and go to state 191
+    declaracion                    shift and go to state 4
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 189
+
+    (82) else_if_block -> ELSE IF . LPAREN comparacion RPAREN LBRACE declaraciones RBRACE
+
+    LPAREN          shift and go to state 192
+
+
+state 190
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones . RBRACE
+    (3) declaraciones -> declaraciones . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    RBRACE          shift and go to state 193
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    asignacion                     shift and go to state 7
+    unario                         shift and go to state 12
+    declaracion                    shift and go to state 21
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario_sin_semicolon           shift and go to state 13
+
+state 191
+
+    (78) else_block -> ELSE LBRACE declaraciones . RBRACE
+    (3) declaraciones -> declaraciones . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    RBRACE          shift and go to state 194
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    declaracion                    shift and go to state 21
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 192
+
+    (82) else_if_block -> ELSE IF LPAREN . comparacion RPAREN LBRACE declaraciones RBRACE
+    (83) comparacion -> . expresion EQUAL expresion
+    (84) comparacion -> . expresion LESS expresion
+    (85) comparacion -> . expresion GREATER expresion
+    (86) comparacion -> . expresion LESSEQUAL expresion
+    (87) comparacion -> . expresion GREATEQUAL expresion
+    (88) comparacion -> . expresion NOTEQUAL expresion
+    (89) comparacion -> . comparacion OR comparacion
+    (90) comparacion -> . comparacion AND comparacion
+    (42) expresion -> . valor
+    (43) expresion -> . ID
+    (48) expresion -> . ID LBRACKET NUM RBRACKET
+    (57) expresion -> . ID LBRACKET NUM RBRACKET PUNTO ID
+    (74) expresion -> . expresion OPERADOR expresion
+    (75) valor -> . NUM
+    (76) valor -> . STRING
+
+    ID              shift and go to state 48
+    NUM             shift and go to state 51
+    STRING          shift and go to state 52
+
+    comparacion                    shift and go to state 195
+    expresion                      shift and go to state 60
+    valor                          shift and go to state 50
+
+state 193
+
+    (91) bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .
+
+    LET             reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    VAR             reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    CONST           reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    CONSOLE         reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    IF              reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    FOR             reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    ID              reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    $end            reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+    RBRACE          reduce using rule 91 (bucle_for -> FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE .)
+
+
+state 194
+
+    (78) else_block -> ELSE LBRACE declaraciones RBRACE .
+
+    LET             reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    VAR             reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    CONST           reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    CONSOLE         reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    IF              reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    FOR             reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    ID              reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    $end            reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+    RBRACE          reduce using rule 78 (else_block -> ELSE LBRACE declaraciones RBRACE .)
+
+
+state 195
+
+    (82) else_if_block -> ELSE IF LPAREN comparacion . RPAREN LBRACE declaraciones RBRACE
+    (89) comparacion -> comparacion . OR comparacion
+    (90) comparacion -> comparacion . AND comparacion
+
+    RPAREN          shift and go to state 196
+    OR              shift and go to state 86
+    AND             shift and go to state 87
+
+
+state 196
+
+    (82) else_if_block -> ELSE IF LPAREN comparacion RPAREN . LBRACE declaraciones RBRACE
+
+    LBRACE          shift and go to state 197
+
+
+state 197
+
+    (82) else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE . declaraciones RBRACE
+    (3) declaraciones -> . declaraciones declaracion
+    (4) declaraciones -> . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    declaraciones                  shift and go to state 198
+    declaracion                    shift and go to state 4
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 198
+
+    (82) else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones . RBRACE
+    (3) declaraciones -> declaraciones . declaracion
+    (5) declaracion -> . asignacion_multiple
+    (6) declaracion -> . asignacion_multiple_sin_semicolon
+    (7) declaracion -> . asignacion
+    (8) declaracion -> . asignacion_sin_semicolon
+    (9) declaracion -> . mostrar
+    (10) declaracion -> . condicional
+    (11) declaracion -> . bucle_for
+    (12) declaracion -> . unario
+    (13) declaracion -> . unario_sin_semicolon
+    (32) asignacion_multiple -> . LET variables_assign SEMICOLON
+    (33) asignacion_multiple -> . VAR variables_assign SEMICOLON
+    (34) asignacion_multiple -> . CONST variables_assign SEMICOLON
+    (35) asignacion_multiple_sin_semicolon -> . LET variables_assign
+    (36) asignacion_multiple_sin_semicolon -> . VAR variables_assign
+    (37) asignacion_multiple_sin_semicolon -> . CONST variables_assign
+    (14) asignacion -> . LET ID ASSIGN expresion SEMICOLON
+    (15) asignacion -> . VAR ID ASSIGN expresion SEMICOLON
+    (16) asignacion -> . CONST ID ASSIGN expresion SEMICOLON
+    (17) asignacion -> . LET ID ASSIGN expresion_array SEMICOLON
+    (18) asignacion -> . CONST ID ASSIGN expresion_array SEMICOLON
+    (19) asignacion -> . VAR ID ASSIGN expresion_array SEMICOLON
+    (20) asignacion -> . LET ID ASSIGN objeto_array SEMICOLON
+    (21) asignacion -> . CONST ID ASSIGN objeto_array SEMICOLON
+    (22) asignacion -> . VAR ID ASSIGN objeto_array SEMICOLON
+    (23) asignacion_sin_semicolon -> . LET ID ASSIGN expresion
+    (24) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion
+    (25) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion
+    (26) asignacion_sin_semicolon -> . LET ID ASSIGN expresion_array
+    (27) asignacion_sin_semicolon -> . CONST ID ASSIGN expresion_array
+    (28) asignacion_sin_semicolon -> . VAR ID ASSIGN expresion_array
+    (29) asignacion_sin_semicolon -> . LET ID ASSIGN objeto_array
+    (30) asignacion_sin_semicolon -> . CONST ID ASSIGN objeto_array
+    (31) asignacion_sin_semicolon -> . VAR ID ASSIGN objeto_array
+    (41) mostrar -> . CONSOLE PUNTO LOG LPAREN expresion RPAREN
+    (77) condicional -> . IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE else_if_blocks else_block
+    (91) bucle_for -> . FOR LPAREN asignacion SEMICOLON comparacion SEMICOLON unario RPAREN LBRACE declaraciones RBRACE
+    (58) unario -> . ID MINUSMINUS SEMICOLON
+    (59) unario -> . ID PLUSPLUS SEMICOLON
+    (60) unario -> . ID ASSIGN expresion SEMICOLON
+    (61) unario -> . ID PLUSEQ expresion SEMICOLON
+    (62) unario -> . ID MINUSEQ expresion SEMICOLON
+    (63) unario -> . ID TIMESEQ expresion SEMICOLON
+    (64) unario -> . ID DIVEQ expresion SEMICOLON
+    (65) unario -> . ID POWEQ expresion SEMICOLON
+    (66) unario_sin_semicolon -> . ID MINUSMINUS
+    (67) unario_sin_semicolon -> . ID PLUSPLUS
+    (68) unario_sin_semicolon -> . ID ASSIGN expresion
+    (69) unario_sin_semicolon -> . ID PLUSEQ expresion
+    (70) unario_sin_semicolon -> . ID MINUSEQ expresion
+    (71) unario_sin_semicolon -> . ID TIMESEQ expresion
+    (72) unario_sin_semicolon -> . ID DIVEQ expresion
+    (73) unario_sin_semicolon -> . ID POWEQ expresion
+
+    RBRACE          shift and go to state 199
+    LET             shift and go to state 14
+    VAR             shift and go to state 15
+    CONST           shift and go to state 16
+    CONSOLE         shift and go to state 18
+    IF              shift and go to state 19
+    FOR             shift and go to state 20
+    ID              shift and go to state 17
+
+    declaracion                    shift and go to state 21
+    asignacion_multiple            shift and go to state 5
+    asignacion_multiple_sin_semicolon shift and go to state 6
+    asignacion                     shift and go to state 7
+    asignacion_sin_semicolon       shift and go to state 8
+    mostrar                        shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle_for                      shift and go to state 11
+    unario                         shift and go to state 12
+    unario_sin_semicolon           shift and go to state 13
+
+state 199
+
+    (82) else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .
+
+    ELSE            reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    LET             reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    VAR             reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    CONST           reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    CONSOLE         reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    IF              reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    FOR             reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    ID              reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    $end            reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+    RBRACE          reduce using rule 82 (else_if_block -> ELSE IF LPAREN comparacion RPAREN LBRACE declaraciones RBRACE .)
+
