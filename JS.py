@@ -45,7 +45,8 @@ tokens = (
     'MINUSEQ',
     'TIMESEQ',
     'DIVEQ',
-    'POWEQ'
+    'POWEQ',
+    'LENGTH'
 )
 
 # Definición de reglas
@@ -89,6 +90,10 @@ def t_CONSOLE(t):
 
 def t_LOG(t):
     r'log'
+    return t
+
+def t_LENGTH(t):
+    r'length'
     return t
 
 def t_IF(t):
@@ -159,6 +164,7 @@ def t_newline(t):
 
 # Regla para manejar errores
 def t_error(t):
+    tabla_errores.append(f"Error: Carácter inesperado '{t.value[0]}' en la línea {t.lineno}")
     print(f"Error: Carácter inesperado '{t.value[0]}' en la línea {t.lineno}")
     t.lexer.skip(1)
 
@@ -177,7 +183,7 @@ def imprimir_tabla_simbolos():
 
 # Ejemplo de uso
 # Prueba del analizador
-with open('codigo.txt', 'r') as file:
+with open('script.js', 'r') as file:
     source_code = file.read()
 
 # Configurar el analizador léxico con el código fuente
@@ -402,6 +408,14 @@ class ElementoArray(Nodo):
         return f'{self.identificador}[{self.indice}]'
     def tipo(self):
         return symbol_table[self.identificador].get('type')
+    
+class LongitudArray(Nodo):
+    def __init__(self, identificador):
+        self.identificador = identificador
+    def parseToPython(self, identation = 0):
+        return f'len({self.identificador})'
+    def tipo(self):
+        return 'Number'
 #Array de objetos
 
 class ObjetosArray(Nodo):
@@ -563,6 +577,16 @@ class BucleFor(Nodo):
         
         return result
 
+class BucleWhile(Nodo):
+    def __init__(self, comparacion, declaraciones):
+        self.comparacion = comparacion
+        self.declaraciones = declaraciones
+    def parseToPython(self, identation = 0):
+        ind = " "*identation
+        result = f'{ind}while {self.comparacion.parseToPython()}:'
+        result += f'\n{self.declaraciones.parseToPython(identation+4)}'
+
+        return result
 precedence = (
     ('left', 'OPERADOR'),
     ('left', 'EQUAL', 'LESS', 'GREATER', 'LESSEQUAL', 'GREATEQUAL', 'NOTEQUAL'),
@@ -601,6 +625,7 @@ def p_declaracion(p):
                 | bucle_for
                 | unario
                 | unario_sin_semicolon
+                | bucle_while
     '''
     p[0]=Declaracion(p[1])
 def p_asignacion(p):
@@ -706,7 +731,12 @@ def p_elementoArray(p):
               | ID LBRACKET ID RBRACKET
     '''
     p[0] = ElementoArray(p[1], p[3])
-        
+    
+def p_elementoArrayLength(p):
+    '''
+    expresion : ID PUNTO LENGTH
+    '''
+    p[0] = LongitudArray(p[1])
 def p_objetoArray(p):
     '''
     objeto_array : LBRACKET LBRACE RBRACE RBRACKET
@@ -843,7 +873,11 @@ def p_bucle_for(p):
     bucle_for : FOR LPAREN asignacion comparacion SEMICOLON unario_sin_semicolon RPAREN LBRACE declaraciones RBRACE
     '''
     p[0] = BucleFor(p[3],p[4],p[6],p[9])
-
+def p_bucle_while(p):
+    '''
+    bucle_while : WHILE LPAREN comparacion RPAREN LBRACE declaraciones RBRACE
+    '''
+    p[0]=BucleWhile(p[3],p[6])
 def p_empty(p):
     'empty :'
     pass
