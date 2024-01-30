@@ -39,7 +39,8 @@ tokens = (
     'LBRACKET',
     'RBRACKET',
     'COMMA',
-    'COLON'
+    'COLON',
+    'WHILE'
 )
 
 # Definición de reglas
@@ -95,6 +96,10 @@ def t_ELSE(t):
 
 def t_FOR(t):
     r'for'
+    return t
+
+def t_WHILE(t):
+    r'while'
     return t
 
 def t_MINUSMINUS(t):
@@ -297,6 +302,38 @@ class ExpresionMultiple(Nodo):
             print('')
         else:
             return tipoExpresion_1
+
+#Aignacion Multiple
+
+class AsignacionMultiple(Nodo):
+    def __init__(self, variables_assign):
+        self.variables_assign = variables_assign
+    def parseToPython(self, identation = 0):
+        return self.variables_assign.parseToPython()
+
+class VariablesAssign(Nodo):
+    def __init__(self, identificador, variables_assign = None, expresion = None):
+        self.identificador = identificador
+        self.variables_assign = variables_assign
+        self.expresion = expresion
+    def parseToPython(self, identation = 0):
+        if self.variables_assign is None and self.expresion is None:
+            if self.identificador not in symbol_table:
+                symbol_table[self.identificador] = {'type': 'None'}
+            return f'{self.identificador} = None'
+        elif self.expresion is None:
+            if self.identificador not in symbol_table:
+                symbol_table[self.identificador] = {'type': 'None'}
+            return f'{self.variables_assign.parseToPython()}\n{self.identificador} = None'
+        elif self.variables_assign is None:
+            if self.identificador not in symbol_table:
+                symbol_table[self.identificador] = {'type': self.expresion.tipo()}
+            return f'{self.identificador} = {self.expresion.parseToPython()}'
+        else:
+            if self.identificador not in symbol_table:
+                symbol_table[self.identificador] = {'type': self.expresion.tipo()}
+            return f'{self.variables_assign.parseToPython()} \n{self.identificador} = {self.expresion.parseToPython()}'
+
 #Array        
 
 class ExpresionArray(Nodo):
@@ -517,7 +554,8 @@ def p_declaracionesDeclaracion(p):
     p[0]=DeclaracionesDeclaracion(p[1])
 def p_declaracion(p):
     '''
-    declaracion : asignacion
+    declaracion : asignacion_multiple
+                | asignacion
                 | mostrar
                 | condicional
                 | bucle_for
@@ -538,6 +576,33 @@ def p_asignacion(p):
             
     '''
     p[0]=Asignacion(p[2],p[3],p[4])
+    
+#Asginacion Multiple    
+    
+def p_asignacionMultiple(p):
+    '''
+    asignacion_multiple : LET variables_assign
+                        | VAR variables_assign
+                        | CONST variables_assign
+    '''
+    p[0]=AsignacionMultiple(p[2])
+def p_variablesAssign(p):
+    '''
+    variables_assign : ID
+                     | ID ASSIGN expresion
+                     | variables_assign COMMA ID ASSIGN expresion
+    '''
+    if len(p) == 2:
+        p[0]=VariablesAssign(p[1])
+    elif len(p) == 4:
+        p[0] = VariablesAssign(p[1],None,p[3])
+    elif len(p) == 6:
+        p[0] = VariablesAssign(p[3],p[1],p[5])
+def p_variablesAssignVars(p):
+    '''
+    variables_assign : variables_assign COMMA ID
+    '''
+    p[0] = VariablesAssign(p[3],p[1])
 def p_mostrar(p):
     '''
     mostrar : CONSOLE PUNTO LOG LPAREN expresion RPAREN
