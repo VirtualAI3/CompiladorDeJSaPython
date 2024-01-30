@@ -35,7 +35,11 @@ tokens = (
     'OR',
     'FOR',
     'PLUSPLUS',
-    'MINUSMINUS'
+    'MINUSMINUS',
+    'LBRACKET',
+    'RBRACKET',
+    'COMMA',
+    'COLON'
 )
 
 # Definición de reglas
@@ -54,6 +58,10 @@ t_LBRACE =r'\{'
 t_RBRACE = r'\}'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
+t_COLON = r'\:'
+t_COMMA = r'\,'
 t_STRING = r'"[^"]*"'
 t_PUNTO = r'\.'
 
@@ -200,6 +208,7 @@ class Asignacion(Nodo):
 
     def parseToPython(self,identation=0):
         if self.val not in symbol_table:
+            print(self.son1)
             tipoDeVariable = self.son1.tipo()
             print(tipoDeVariable)
             symbol_table[self.val] = {'type': tipoDeVariable}
@@ -277,6 +286,77 @@ class ExpresionMultiple(Nodo):
             print('')
         else:
             return tipoExpresion_1
+#Array        
+
+class ExpresionArray(Nodo):
+    def __init__(self, elementos = None):
+        self.elementos = elementos
+    def parseToPython(self,identation = 0):
+        if self.elementos is not None:
+            return f'[{self.elementos.parseToPython()}]'
+        else:
+            return '[]'
+    def tipo(self):
+        return 'Array'
+class Elementos(Nodo):
+    def __init__(self,elemento,elementos=None):
+        self.elemento = elemento
+        self.elementos = elementos
+    def parseToPython(self,identtation = 0):
+        if self.elementos is None:
+            return f'{self.elemento.parseToPython()}'
+        else:
+            return f'{self.elemento.parseToPython()},{self.elementos.parseToPython()}'
+
+class ElementoArray(Nodo):
+    def __init__(self,identificador, indice):
+        self.identificador = identificador
+        self.indice = indice
+    def parseToPython(self, indentation = 0):
+        return f'{self.identificador}[{self.indice}]'
+#Array de objetos
+
+class ObjetosArray(Nodo):
+    def __init__(self, objetos = None):
+        self.objetos = objetos
+    def parseToPython(self, indetation = 0):
+        if self.objetos is not None:
+            return f'[{self.objetos.parseToPython()}]'
+        else:
+            return '[{}]'    
+    def tipo(self):
+        return 'Array'
+
+class Objetos(Nodo):
+    def __init__(self, objeto, objetos = None):
+        self.objeto = objeto
+        self.objetos = objetos
+    def parseToPython(self, indetation = 0):
+        if self.objetos is None:
+            return f'{self.objeto.parseToPython()}'
+        else:
+            return f'{self.objeto.parseToPython()},\n{self.objetos.parseToPython()}'
+class Objeto(Nodo):
+    def __init__(self, propiedades):
+        self.propiedades = propiedades
+    def parseToPython(self, identation = 0):
+        return f'{{{self.propiedades.parseToPython()}}}'
+class Propiedades(Nodo):
+    def __init__(self, propiedad, propiedades = None):
+        self.propiedad = propiedad
+        self.propiedades = propiedades
+    def parseToPython(self, identation = 0):
+        if self.propiedades is None:
+            return f'{self.propiedad.parseToPython()}'
+        else:
+            return f'{self.propiedad.parseToPython()},{self.propiedades.parseToPython()}'
+class Propiedad(Nodo):
+    def __init__(self, identificador, valor):
+        self.identificador = identificador
+        self.valor = valor
+    def parseToPython(self, identation = 0):
+        return f'\'{self.identificador}\': {self.valor}'
+
 class Valor(Nodo):
     def __init__(self, valor):
         self.valor = valor
@@ -422,6 +502,13 @@ def p_asignacion(p):
     asignacion : LET ID ASSIGN expresion
                | VAR ID ASSIGN expresion
                | CONST ID ASSIGN expresion
+               | LET ID ASSIGN expresion_array
+               | CONST ID ASSIGN expresion_array
+               | VAR ID ASSIGN expresion_array
+               | LET ID ASSIGN objeto_array
+               | CONST ID ASSIGN objeto_array
+               | VAR ID ASSIGN objeto_array
+            
     '''
     p[0]=Asignacion(p[2],p[3],p[4])
 def p_mostrar(p):
@@ -440,7 +527,71 @@ def p_expresionIdentificador(p):
     expresion : ID
     '''
     p[0] = ExpresionIdentificador(p[1], p.lineno(1))
-    
+
+def p_expresionArray(p):
+    '''
+    expresion_array : LBRACKET RBRACKET 
+                    | LBRACKET elementos RBRACKET
+    '''
+    if len(p) == 3:
+        p[0]=ExpresionArray()
+    elif len(p) == 4:
+        p[0]=ExpresionArray(p[2])
+def p_elementos(p):
+    '''
+    elementos : expresion
+              | elementos COMMA expresion
+    '''
+    if len(p) == 2:
+        p[0]=Elementos(p[1])
+    elif len(p) == 4:
+        p[0]=Elementos(p[1],p[3])
+        
+def p_elementoArray(p):
+    '''
+    expresion : ID LBRACKET NUM RBRACKET
+    '''
+    p[0] = ElementoArray(p[1], p[3])
+        
+def p_objetoArray(p):
+    '''
+    objeto_array : LBRACKET LBRACE RBRACE RBRACKET
+                 | LBRACKET objetos RBRACKET
+    '''
+    if len(p) == 5:
+        p[0] = ObjetosArray()
+    elif len(p) == 4:
+        p[0] = ObjetosArray(p[2])
+def p_objetos(p):
+    '''
+    objetos : objeto
+            | objetos COMMA objeto
+    '''
+    if len(p) == 2:
+        p[0] = Objetos(p[1])
+    elif len(p) == 4:
+        p[0] = Objetos(p[1],p[3])
+def p_objeto(p):
+    '''
+    objeto : LBRACE propiedades RBRACE
+    '''
+    p[0] = Objeto(p[2])
+def p_propiedades(p):
+    '''
+    propiedades : propiedad 
+                | propiedades COMMA propiedad
+    '''
+    if len(p) == 2:
+        p[0] = Propiedades(p[1])
+    elif len(p) == 4:
+        p[0] = Propiedades(p[1],p[3])
+def p_propiedad(p):
+    '''
+    propiedad : ID COLON valor
+    '''
+    p[0] = Propiedad(p[1],p[3])
+#Por revisar p_unario
+
 def p_unario(p):
     '''
     unario : ID MINUSMINUS
