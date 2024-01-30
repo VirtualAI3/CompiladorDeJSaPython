@@ -40,7 +40,12 @@ tokens = (
     'RBRACKET',
     'COMMA',
     'COLON',
-    'WHILE'
+    'WHILE',
+    'PLUSEQ',
+    'MINUSEQ',
+    'TIMESEQ',
+    'DIVEQ',
+    'POWEQ'
 )
 
 # Definición de reglas
@@ -110,6 +115,25 @@ def t_PLUSPLUS(t):
     r'\+\+'
     return t
 
+def t_PLUSEQ(t):
+    r'\+='
+    return t
+
+def t_MINUSEQ(t):
+    r'\-='
+    return t
+
+def t_TIMESEQ(t):
+    r'\*='
+    return t
+
+def t_DIVEQ(t):
+    r'/='
+    return t
+    
+def t_POWEQ(t):
+    r'\*\*='
+    return t
 def t_NUM(t):
     r'\d+(\.\d+)?'
     if t.value.isdigit():
@@ -273,6 +297,19 @@ class ExpresionIncDec(Nodo):
         elif self.operador == '--' and self.identificador in symbol_table:
             return f'{self.identificador}-=1'
         return f'XD'
+    
+class AsignacionDespuesDeDeclaracion(Nodo):
+    def __init__(self, identificador, operador, expresion):
+        self.identificador = identificador
+        self.operador = operador
+        self.expresion = expresion
+    
+    def parseToPython(self, identation = 0):
+        if self.identificador in symbol_table:
+            symbol_table[self.identificador]['type'] = self.expresion.tipo()
+            return f'{self.identificador} {self.operador} {self.expresion.parseToPython()}'
+        else:
+           tabla_errores.append(f'Error: variable {self.identificador} no declarada ')      
 class ExpresionMultiple(Nodo):
     def __init__(self, expresion_1, operador, expresion_2):
         self.expresion_1 = expresion_1
@@ -555,35 +592,59 @@ def p_declaracionesDeclaracion(p):
 def p_declaracion(p):
     '''
     declaracion : asignacion_multiple
+                | asignacion_multiple_sin_semicolon
                 | asignacion
+                | asignacion_sin_semicolon
                 | mostrar
                 | condicional
                 | bucle_for
                 | unario
+                | unario_sin_semicolon
     '''
     p[0]=Declaracion(p[1])
 def p_asignacion(p):
     '''
-    asignacion : LET ID ASSIGN expresion
-               | VAR ID ASSIGN expresion
-               | CONST ID ASSIGN expresion
-               | LET ID ASSIGN expresion_array
-               | CONST ID ASSIGN expresion_array
-               | VAR ID ASSIGN expresion_array
-               | LET ID ASSIGN objeto_array
-               | CONST ID ASSIGN objeto_array
-               | VAR ID ASSIGN objeto_array
-            
+    asignacion : LET ID ASSIGN expresion SEMICOLON
+               | VAR ID ASSIGN expresion SEMICOLON
+               | CONST ID ASSIGN expresion SEMICOLON
+               | LET ID ASSIGN expresion_array SEMICOLON
+               | CONST ID ASSIGN expresion_array SEMICOLON
+               | VAR ID ASSIGN expresion_array SEMICOLON
+               | LET ID ASSIGN objeto_array SEMICOLON
+               | CONST ID ASSIGN objeto_array SEMICOLON
+               | VAR ID ASSIGN objeto_array SEMICOLON
     '''
-    p[0]=Asignacion(p[2],p[3],p[4])
+    p[0] = Asignacion(p[2], p[3], p[4])
+
+def p_asignacion_sin_semicolon(p):
+    '''
+    asignacion_sin_semicolon : LET ID ASSIGN expresion
+                             | VAR ID ASSIGN expresion
+                             | CONST ID ASSIGN expresion
+                             | LET ID ASSIGN expresion_array
+                             | CONST ID ASSIGN expresion_array
+                             | VAR ID ASSIGN expresion_array
+                             | LET ID ASSIGN objeto_array
+                             | CONST ID ASSIGN objeto_array
+                             | VAR ID ASSIGN objeto_array
+    '''
+    p[0] = Asignacion(p[2], p[3], p[4])
+
     
 #Asginacion Multiple    
     
 def p_asignacionMultiple(p):
     '''
-    asignacion_multiple : LET variables_assign
-                        | VAR variables_assign
-                        | CONST variables_assign
+    asignacion_multiple : LET variables_assign SEMICOLON
+                        | VAR variables_assign SEMICOLON
+                        | CONST variables_assign SEMICOLON
+    '''
+    p[0]=AsignacionMultiple(p[2])
+def p_asignacionMultipleSinSemiColon(p):
+    '''
+    asignacion_multiple_sin_semicolon : LET variables_assign
+                                      | VAR variables_assign
+                                      | CONST variables_assign
     '''
     p[0]=AsignacionMultiple(p[2])
 def p_variablesAssign(p):
@@ -694,11 +755,35 @@ def p_expresionAccesoObjetoArray(p):
 
 def p_unario(p):
     '''
-    unario : ID MINUSMINUS
-           | ID PLUSPLUS
+    unario : ID MINUSMINUS SEMICOLON
+           | ID PLUSPLUS SEMICOLON
+           | ID ASSIGN expresion SEMICOLON
+           | ID PLUSEQ expresion SEMICOLON
+           | ID MINUSEQ expresion SEMICOLON
+           | ID TIMESEQ expresion SEMICOLON
+           | ID DIVEQ expresion SEMICOLON
+           | ID POWEQ expresion SEMICOLON
     '''
-    p[0] = ExpresionIncDec(p[1],p[2])
+    if len(p) == 4:
+        p[0] = ExpresionIncDec(p[1],p[2])
+    elif len(p) == 5:
+        p[0] = AsignacionDespuesDeDeclaracion(p[1],p[2],p[3])
     
+def p_unario_sin_semicolon(p):
+    '''
+    unario_sin_semicolon : ID MINUSMINUS
+           | ID PLUSPLUS
+           | ID ASSIGN expresion
+           | ID PLUSEQ expresion
+           | ID MINUSEQ expresion
+           | ID TIMESEQ expresion
+           | ID DIVEQ expresion
+           | ID POWEQ expresion
+    '''    
+    if len(p) == 3:
+        p[0] = ExpresionIncDec(p[1],p[2])
+    elif len(p) == 4:
+        p[0] = AsignacionDespuesDeDeclaracion(p[1],p[2],p[3])
 def p_expresionMultiple(p):
     '''
     expresion : expresion OPERADOR expresion
