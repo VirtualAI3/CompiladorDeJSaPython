@@ -46,7 +46,8 @@ tokens = (
     'TIMESEQ',
     'DIVEQ',
     'POWEQ',
-    'LENGTH'
+    'LENGTH',
+    'FUNCTION'
 )
 
 # Definición de reglas
@@ -112,6 +113,10 @@ def t_WHILE(t):
     r'while'
     return t
 
+def t_FUNCTION(t):
+    r'function'
+    return t
+
 def t_MINUSMINUS(t):
     r'--'
     return t
@@ -153,6 +158,9 @@ def t_ID(t):
     #       symbol_table[t.value] = {'type': t.type, 'line': t.lineno}
     return t
 
+def t_COMMENT(t):
+    r'//.*'
+    pass
 
 # Reglas para ignorar caracteres como espacios y tabulaciones
 t_ignore = ' \t'
@@ -585,8 +593,65 @@ class BucleWhile(Nodo):
         ind = " "*identation
         result = f'{ind}while {self.comparacion.parseToPython()}:'
         result += f'\n{self.declaraciones.parseToPython(identation+4)}'
-
+        
         return result
+
+class Funcion(Nodo):
+    def __init__(self, identificador, parametros, declaraciones):
+        self.identificador = identificador
+        self.parametros = parametros
+        self.declaraciones = declaraciones
+    def parseToPython(self, identation = 0):
+        ind = " "*identation
+        result = f'def {self.identificador} ({self.parametros.parseToPython()}):'
+        result+=f'\n{self.declaraciones.parseToPython(identation + 4)}'
+        
+        return result
+    
+class Parametros(Nodo):
+    def __init__(self,parametro=None, parametros = None):
+        self.parametro = parametro
+        self.parametros = parametros
+    def parseToPython(self, identation = 0):
+        if self.parametro is not None:
+            if self.parametros is not None:
+                return f'{self.parametro.parseToPython()}, {self.parametros.parseToPython()}'
+            else:
+                return f'{self.parametro.parseToPython()}'
+        else:
+            return ''
+class Parametro(Nodo):
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def parseToPython(self):
+        if self.nombre not in symbol_table:
+            symbol_table[self.nombre] = {'type': 'None'}
+        return self.nombre
+        
+class LlamadaFuncionS(Nodo):
+    def __init__(self, nombre, argumentos=None):
+        self.nombre = nombre
+        self.argumentos = argumentos
+
+    def parseToPython(self, identation=0):
+        return f'{self.nombre}({self.argumentos.parseToPython()})'
+        
+class LlamadaFuncion(Nodo):
+    def __init__(self, llamada_funcion):
+        self.llamada_funcion = llamada_funcion
+    def parseToPython(self, identation=0):
+        return self.llamada_funcion.parseToPython()
+
+class Argumentos(Nodo):
+    def __init__(self, argumento, argumentos):
+        self.argumento = argumento
+        self.argumentos = argumentos
+    def parseToPython(self, identation = 0):
+        if self.argumentos is None:
+            return f'{self.argumento.parseToPython()}'
+        else:
+           return f'{self.argumento.parseToPython()},{self.argumentos.parseToPython()}' 
 precedence = (
     ('left', 'OPERADOR'),
     ('left', 'EQUAL', 'LESS', 'GREATER', 'LESSEQUAL', 'GREATEQUAL', 'NOTEQUAL'),
@@ -616,7 +681,8 @@ def p_declaracionesDeclaracion(p):
     p[0]=DeclaracionesDeclaracion(p[1])
 def p_declaracion(p):
     '''
-    declaracion : asignacion_multiple
+    declaracion : funcion
+                | asignacion_multiple
                 | asignacion_multiple_sin_semicolon
                 | asignacion
                 | asignacion_sin_semicolon
@@ -626,6 +692,7 @@ def p_declaracion(p):
                 | unario
                 | unario_sin_semicolon
                 | bucle_while
+                | llamada_funcion
     '''
     p[0]=Declaracion(p[1])
 def p_asignacion(p):
@@ -706,6 +773,11 @@ def p_expresionIdentificador(p):
     '''
     p[0] = ExpresionIdentificador(p[1], p.lineno(1))
 
+def p_expresionFuncion(p):
+    '''
+    expresion : llamada_funcion
+    '''
+    p[0] = LlamadaFuncion(p[1])
 def p_expresionArray(p):
     '''
     expresion_array : LBRACKET RBRACKET 
@@ -878,6 +950,46 @@ def p_bucle_while(p):
     bucle_while : WHILE LPAREN comparacion RPAREN LBRACE declaraciones RBRACE
     '''
     p[0]=BucleWhile(p[3],p[6])
+    
+def p_funcion(p):
+    '''
+    funcion : FUNCTION ID LPAREN parametros RPAREN LBRACE declaraciones RBRACE
+    '''
+    p[0] = Funcion(p[2], p[4], p[7])
+
+def p_parametros(p):
+    '''
+    parametros : empty
+               | parametro
+               | parametros COMMA parametro
+    '''
+    if len(p) == 2:
+        p[0] = Parametros(p[1])
+    elif len(p) == 4:
+        p[0] = Parametros(p[3], p[1])
+
+def p_parametro(p):
+    '''
+    parametro : ID
+    '''
+    p[0] = Parametro(p[1])
+    
+def p_llamada_funcion(p):
+    '''
+    llamada_funcion : ID LPAREN argumentos RPAREN
+    '''
+    p[0] = LlamadaFuncionS(p[1], p[3])
+    
+def p_argumentos(p):
+    '''
+    argumentos : expresion
+               | argumentos COMMA expresion
+    '''
+    if len(p) == 2:
+        p[0] = Argumentos(p[1],None)
+    elif len(p) == 4:
+        p[0] = Argumentos(p[3], p[1])
+    
 def p_empty(p):
     'empty :'
     pass
